@@ -11,6 +11,7 @@ namespace GravTr0n
     {
         public Vector2 Position { get; set; }
         private Viewport _viewPort;
+        
 
         public Camera(Viewport viewPort)
         {
