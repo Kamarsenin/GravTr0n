@@ -18,12 +18,15 @@ namespace GravTr0n
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private Player _player;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            Components.Add(new SpriteComponent(this));
+            SpriteComponent renderer = new SpriteComponent(this);
+            Components.Add(renderer);
+            Services.AddService(typeof(IDrawSprites), renderer);
         }
 
         /// <summary>
@@ -48,7 +51,11 @@ namespace GravTr0n
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            _player = new Player(Content.Load<Texture2D>("spritesheettest1"));
+
+            IDrawSprites renderer = (IDrawSprites)
+                Services.GetService(typeof(IDrawSprites));
+            renderer.AddDrawable(_player);
         }
 
         /// <summary>
