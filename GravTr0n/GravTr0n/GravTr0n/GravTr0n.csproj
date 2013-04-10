@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="DrawData.cs" />
     <Compile Include="IDrawSprites.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
