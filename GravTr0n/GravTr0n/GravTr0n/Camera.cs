@@ -8,12 +8,11 @@ namespace GravTr0n
     class Camera
     {
         public Vector2 Position { get; set; }
-        private Viewport viewPort;
+        private Viewport _viewPort;
 
-        // Konstruktor
         public Camera(Viewport viewPort)
         {
-            this.viewPort = viewPort;
+            this.viewPort = _viewPort;
             Position = Vector2.Zero;
         }
         public Matrix GetViewPortMatrix()
