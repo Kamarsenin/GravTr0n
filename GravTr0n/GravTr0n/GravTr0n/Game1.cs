@@ -23,6 +23,7 @@ namespace GravTr0n
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Components.Add(new SpriteComponent(this));
         }
 
         /// <summary>
