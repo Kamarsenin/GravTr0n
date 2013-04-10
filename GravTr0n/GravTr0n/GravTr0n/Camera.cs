@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GravTr0n
 {
@@ -12,7 +14,7 @@ namespace GravTr0n
 
         public Camera(Viewport viewPort)
         {
-            this.viewPort = _viewPort;
+            this._viewPort = viewPort;
             Position = Vector2.Zero;
         }
         public Matrix GetViewPortMatrix()
