@@ -11,14 +11,14 @@ namespace GravTr0n
     {
         public Texture2D Art { get; set; }
 
-        public Point Position 
+        public Vector2 Position 
         {
             get { return _position; } 
             set 
             { 
                 _position = value;
-                _destination.X = _position.X;
-                _destination.Y = _position.Y;
+                _destination.X = (int)_position.X;
+                _destination.Y = (int)_position.Y;
             }
         }
 
@@ -36,7 +36,7 @@ namespace GravTr0n
         public Color BlendColor { get; set; }
 
         private Rectangle _destination;
-        private Point _position;
+        private Vector2 _position;
 
         public Player(Texture2D art)
             : this(art, art.Bounds)
