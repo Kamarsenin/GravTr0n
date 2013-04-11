@@ -87,10 +87,10 @@ namespace GravTr0n
             
             _menuButton2 = new AnimatedDrawable(_buttonArt, 5);
             _menuButton2.Source = new Rectangle(0, _menuButton1.Source.Height, 143, 98);
-            _menuButton2.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 98, (GraphicsDevice.Viewport.Height / 2 - 45));
+            _menuButton2.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 98, (GraphicsDevice.Viewport.Height / 2 - 98));
             renderer.AddDrawable(_menuButton2);
             _menuButton2Controller = new AnimationController(_menuButton2, 0.1f);
-            
+            _menuButton2.StartingOffset = new Point(_menuButton2.StartingOffset.X, 98);
         }
 
         /// <summary>
