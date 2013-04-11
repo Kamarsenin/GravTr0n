@@ -21,7 +21,7 @@ namespace GravTr0n
         private Player _player;
         private Camera _camera;
         private float _rotation;
-        private PlayerAnimationController _animController;
+        private AnimationController _animController;
 
         public Game1()
         {
@@ -59,7 +59,7 @@ namespace GravTr0n
             IDrawSprites renderer = (IDrawSprites) Services.GetService(typeof(IDrawSprites));
             renderer.AddDrawable(_player);
 
-            _animController = new PlayerAnimationController(_player, 0.3f);
+            _animController = new AnimationController(_player, 0.3f);
 
             _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
         }

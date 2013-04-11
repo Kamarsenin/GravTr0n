@@ -15,8 +15,8 @@ namespace GravTr0n
     public class ScreenMenu : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        private PlayerAnimationController _startButtonController;
-        private PlayerAnimationController _exitButtonController;
+        private AnimationController _startButtonController;
+        private AnimationController _exitButtonController;
         private Texture2D menuSpriteSheet;
         private Thread backgroundThread;
         private bool isLoading = false;
@@ -79,8 +79,8 @@ namespace GravTr0n
             renderer.AddDrawable(_startButton);
             renderer.AddDrawable(_exitButton);
 
-            _exitButtonController = new PlayerAnimationController(_exitButton, 0.1f);
-            _startButtonController = new PlayerAnimationController(_startButton, 0.1f);
+            _exitButtonController = new AnimationController(_exitButton, 0.1f);
+            _startButtonController = new AnimationController(_startButton, 0.1f);
         }
         void MouseClicked(int x, int y)
         {
