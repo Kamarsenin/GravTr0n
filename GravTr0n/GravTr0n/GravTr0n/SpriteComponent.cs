@@ -73,14 +73,14 @@ namespace GravTr0n
         {
             base.Draw(gameTime);
             _drawer.Begin();
-            foreach (Player drawData in _toDraw)
+            foreach (DrawData drawData in _toDraw)
             {
                 drawElement(drawData);
             }
             _drawer.End();
         }
 
-        protected virtual void drawElement(Player drawable)
+        protected virtual void drawElement(DrawData drawable)
         {
             _drawer.Draw(drawable.Art,drawable.Destination,
                 drawable.Source, Color.White);
