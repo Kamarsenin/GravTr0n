@@ -60,8 +60,9 @@ namespace GravTr0n
             _player.Destination = new Rectangle(0, 0, 100, 117);
 
             IDrawSprites renderer = (IDrawSprites)
-                Services.GetService(typeof(IDrawSprites));
+            Services.GetService(typeof(IDrawSprites));
             renderer.AddDrawable(_player);
+
             _animController = new PlayerAnimationController(_player, 0.3f);
 
             _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
