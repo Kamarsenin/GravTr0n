@@ -21,10 +21,9 @@ namespace GravTr0n
         private Player _player;
         private Camera _camera;
         private float _rotation;
-        private AnimationController _animController;
+        private PlayerAnimationController _animController;
         private AnimatedDrawable _menuButton1;
         private AnimatedDrawable _menuButton2;
-
 
         public Game1()
         {
