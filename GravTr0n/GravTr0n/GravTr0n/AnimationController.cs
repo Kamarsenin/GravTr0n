@@ -6,14 +6,14 @@ using Microsoft.Xna.Framework;
 
 namespace GravTr0n
 {
-    public class PlayerAnimationController
+    class AnimationController
     {
-        public Player _player;
+        public AnimatedDrawable _player;
         // time between frames => Change to increase/decrease
         public float StepTime { get; set; }
         private float _timer;
 
-        public PlayerAnimationController(Player Player,
+        public AnimationController(AnimatedDrawable Player,
             float animationStepTime)
         {
             _player = Player;

@@ -21,9 +21,9 @@ namespace GravTr0n
         private Player _player;
         private Camera _camera;
         private float _rotation;
-        private PlayerAnimationController _animController;
-        private PlayerAnimationController _menuButton1Controller;
-        private PlayerAnimationController _menuButton2Controller;
+        private AnimationController _animController;
+        private AnimationController _menuButton1Controller;
+        private AnimationController _menuButton2Controller;
         private AnimatedDrawable _menuButton1;
         private AnimatedDrawable _menuButton2;
         MouseState mouseState;
@@ -73,7 +73,7 @@ namespace GravTr0n
             IDrawSprites renderer = (IDrawSprites) Services.GetService(typeof(IDrawSprites));
             renderer.AddDrawable(_player);
 
-            _animController = new PlayerAnimationController(_player, 0.3f);
+            _animController = new AnimationController(_player, 0.3f);
 
             _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
 
@@ -83,13 +83,13 @@ namespace GravTr0n
             _menuButton1.Source = new Rectangle(0, 0, 143, 98);
             _menuButton1.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 98, GraphicsDevice.Viewport.Height / 2 - 143);
             renderer.AddDrawable(_menuButton1);
-            _menuButton1Controller = new PlayerAnimationController(_menuButton1, 0.1f);
+            _menuButton1Controller = new AnimationController(_menuButton1, 0.1f);
             
             _menuButton2 = new AnimatedDrawable(_buttonArt, 5);
             _menuButton2.Source = new Rectangle(0, _menuButton1.Source.Height, 143, 98);
             _menuButton2.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 98, (GraphicsDevice.Viewport.Height / 2 - 45));
             renderer.AddDrawable(_menuButton2);
-            _menuButton2Controller = new PlayerAnimationController(_menuButton2, 0.1f);
+            _menuButton2Controller = new AnimationController(_menuButton2, 0.1f);
             
         }
 
