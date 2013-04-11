@@ -28,7 +28,36 @@ namespace GravTr0n
         public Rectangle Source { get; set; }
         public Color BlendColor { get; set; }
         // Which way am I facing?
-        public Direction Facing { get; set; }
+        public Direction Facing { 
+            get
+            {
+                return _facing;
+            }
+            set
+            {
+                _facing = value;
+                int temp = 2;
+                if (_facing == Direction.Idle)
+                {
+                    temp = 2;
+                }
+                else if (_facing == Direction.Right)
+                {
+                    temp = 0;
+                }
+                else if (_facing == Direction.Left)
+                {
+                    temp = 1;
+                }
+                else if (_facing == Direction.InAir)
+                {
+                    temp = 3;
+                }
+
+                StartingOffset = new Point(StartingOffset.X, Destination.Height * temp);
+            }
+        }
+        private Direction _facing;
 
         public Vector2 Position 
         {
@@ -65,7 +94,8 @@ namespace GravTr0n
                 if (CurrentFrame >= NumberOfFrames)
                     CurrentFrame = 0;
                 Rectangle newSource = Source;
-                newSource.X = StartingOffset.X + _currentFrame * newSource.Width;
+                newSource.X = StartingOffset.X + (_currentFrame * newSource.Width);
+                newSource.Y = StartingOffset.Y;
                 Source = newSource;
             }
         }
@@ -73,13 +103,13 @@ namespace GravTr0n
         public Player(Texture2D art, int numberOfFrames)
         {
             Art = art;
-            Source = art.Bounds;
+            Source = new Rectangle(0, 0, 100, 117);
             Destination = Source;
             BlendColor = Color.White;
-            Facing = Direction.Right;
-            NumberOfFrames = numberOfFrames;
             StartingOffset = Point.Zero;
-            _currentFrame = 0;
+            Facing = Direction.Idle;
+            NumberOfFrames = numberOfFrames;
+            CurrentFrame = 0;
         }
     }
 }
