@@ -7,8 +7,8 @@ namespace GravTr0n
 {
     interface IInputService
     {
-        public bool CheckMoveLeft;
-        public bool CheckMoveRight;
-        public bool CheckJump;
+        bool CheckMoveLeft();
+        bool CheckMoveRight();
+        bool CheckJump();
     }
 }
