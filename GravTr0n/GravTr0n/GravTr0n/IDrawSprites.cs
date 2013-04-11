@@ -7,7 +7,7 @@ namespace GravTr0n
 {
     interface IDrawSprites
     {
-        void AddDrawable(Player drawable);
-        void RemoveDrawable(Player drawable);
+        void AddDrawable(DrawData drawable);
+        void RemoveDrawable(DrawData drawable);
     }
 }

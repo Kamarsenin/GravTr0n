@@ -18,7 +18,7 @@ namespace GravTr0n
     {
         private SpriteBatch _drawer;
         
-        protected List<Player> _toDraw = new List<Player>();
+        protected List<DrawData> _toDraw = new List<DrawData>();
 
         public SpriteComponent(Game game)
             : base(game)
@@ -32,7 +32,7 @@ namespace GravTr0n
             _drawer = new SpriteBatch(Game.GraphicsDevice);
         }
 
-        public void AddDrawable(Player drawable)
+        public void AddDrawable(DrawData drawable)
         {
             if (drawable == null || _toDraw.Contains(drawable))
             {
@@ -42,7 +42,7 @@ namespace GravTr0n
             _toDraw.Add(drawable);
         }
 
-        public void RemoveDrawable(Player toRemove)
+        public void RemoveDrawable(DrawData toRemove)
         {
             _toDraw.Remove(toRemove);
         }

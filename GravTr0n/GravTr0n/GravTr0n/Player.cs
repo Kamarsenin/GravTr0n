@@ -60,16 +60,9 @@ namespace GravTr0n
         }
         private Direction _facing;
 
-        public Player(Texture2D art, int numberOfFrames)
+        public Player(Texture2D art, int numberOfFrames) : base(art, numberOfFrames)
         {
-            Art = art;
-            Source = new Rectangle(0, 0, 100, 117);
-            Destination = Source;
-            BlendColor = Color.White;
-            StartingOffset = Point.Zero;
-            NumberOfFrames = numberOfFrames;
             Facing = Direction.Idle;
-            CurrentFrame = 0;
         }
 
         public void Update()
