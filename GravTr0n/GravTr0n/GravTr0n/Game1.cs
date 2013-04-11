@@ -22,6 +22,9 @@ namespace GravTr0n
         private Camera _camera;
         private float _rotation;
         private AnimationController _animController;
+        private AnimatedDrawable _menuButton1;
+        private AnimatedDrawable _menuButton2;
+
 
         public Game1()
         {
@@ -62,6 +65,22 @@ namespace GravTr0n
             _animController = new AnimationController(_player, 0.3f);
 
             _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
+
+            Texture2D _buttonArt = Content.Load<Texture2D>("meny");
+
+            _menuButton1 = new AnimatedDrawable();
+            _menuButton1.Art = _buttonArt;
+            _menuButton1.NumberOfFrames = 5;
+            _menuButton1.Source = new Rectangle(0, 0, 143, 98);
+            _menuButton1.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 98, GraphicsDevice.Viewport.Height / 2 - 143);
+            renderer.AddDrawable(_menuButton1);
+
+            _menuButton2 = new AnimatedDrawable();
+            _menuButton2.Art = _buttonArt;
+            _menuButton2.NumberOfFrames = 5;
+            _menuButton2.Source = new Rectangle(0, _menuButton1.Source.Height, 143, 98);
+            _menuButton2.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 98, (GraphicsDevice.Viewport.Height / 2 - 45));
+            renderer.AddDrawable(_menuButton2);
         }
 
         /// <summary>
