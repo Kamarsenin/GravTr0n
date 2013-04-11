@@ -93,17 +93,20 @@ namespace GravTr0n
             if (buttonpenis.IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            if (buttonpenis.IsKeyDown(Keys.D))
+            if (buttonpenis.IsKeyDown(Keys.D) && _player.Velocity.X < 20)
             {
-                _player.Velocity = new Vector2(4, 0);
+                _player.Velocity += new Vector2(1, 0);
             }
-            else if (buttonpenis.IsKeyDown(Keys.A))
+            else if (buttonpenis.IsKeyDown(Keys.A) && _player.Velocity.X > -20)
             {
-                _player.Velocity = new Vector2(-4, 0);
+                _player.Velocity += new Vector2(-1, 0);
             }
             else
-            {
-                _player.Velocity = new Vector2(0, 0);
+            { 
+                if (_player.Velocity.X > 0)
+                    _player.Velocity -= new Vector2(1f, 0f);
+                else if (_player.Velocity.X < 0)
+                    _player.Velocity += new Vector2(1f, 0f);  
             }
 
 
@@ -124,9 +127,6 @@ namespace GravTr0n
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, _camera.Transform);
             spriteBatch.End();
-
-
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
