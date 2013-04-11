@@ -11,6 +11,11 @@ using Microsoft.Xna.Framework.Media;
 
 namespace GravTr0n
 {
+    public enum GameState
+    {
+        StartMenu,
+        Playing
+    }
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -28,14 +33,9 @@ namespace GravTr0n
         private AnimatedDrawable _menuButton2;
         MouseState mouseState;
         MouseState previousMouseState;
+        public GameState gameState { get; set; }
         IInputService input;
-        GameState gameState;
-        enum GameState
-        {
-            StartMenu,
-            Playing
-        }
-
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
