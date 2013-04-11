@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GravTr0n
 {
@@ -24,6 +25,13 @@ namespace GravTr0n
                 newSource.Y = StartingOffset.Y;
                 Source = newSource;
             }
+        }
+
+        public AnimatedDrawable(Texture2D art, int numberOfFrames) : base(art)
+        {
+            StartingOffset = Point.Zero;
+            NumberOfFrames = numberOfFrames;
+            CurrentFrame = 0;
         }
     }
 }

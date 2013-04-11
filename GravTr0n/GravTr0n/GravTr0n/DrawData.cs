@@ -9,7 +9,7 @@ namespace GravTr0n
 {
     public class DrawData
     {
-        private Rectangle _destiantion;
+        private Rectangle _destination;
         private Vector2 _position;
 
         public Texture2D Art { get; set; }
@@ -25,20 +25,28 @@ namespace GravTr0n
             set
             {
                 _position = value;
-                _destiantion.X = (int)_position.X;
-                _destiantion.Y = (int)_position.Y;
+                _destination.X = (int)_position.X;
+                _destination.Y = (int)_position.Y;
             }
         }
 
         public Rectangle Destination
         {
-            get { return _destiantion; }
+            get { return _destination; }
             set
             {
-                _destiantion = value;
-                _position.X = _destiantion.X;
-                _position.Y = _destiantion.Y;
+                _destination = value;
+                _position.X = _destination.X;
+                _position.Y = _destination.Y;
             }
+        }
+
+        public DrawData(Texture2D art)
+        {
+            Art = art;
+            Source = new Rectangle(0, 0, 100, 117);
+            Destination = Source;
+            BlendColor = Color.White;
         }
     }
 }
