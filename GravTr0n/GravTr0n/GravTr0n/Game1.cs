@@ -60,7 +60,7 @@ namespace GravTr0n
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
             gameState = GameState.StartMenu;
-            KeyBindings.GenerateKeyBindingsFromXmlFile("Content/keybindings.xml");
+            input = (IInputService)Services.GetService(typeof(IInputService));
             base.Initialize();
         }
 
@@ -75,7 +75,7 @@ namespace GravTr0n
             Texture2D _playerArt = Content.Load<Texture2D>("spritesheettest1");
 
             Rectangle playerRect = new Rectangle(0, 0, 100, 117);
-            _player = new Player(_playerArt, 5, playerRect);
+            _player = new Player(_playerArt, 5, playerRect, input);
             
             IDrawSprites renderer = (IDrawSprites) Services.GetService(typeof(IDrawSprites));    
             
@@ -122,38 +122,12 @@ namespace GravTr0n
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            KeyboardState buttonpenis = Keyboard.GetState();
 
-            input = (IInputService)Services.GetService(typeof(IInputService));
-
-            if (buttonpenis.IsKeyDown(Keys.Escape))
+            if (input.CheckQuit())
                 this.Exit();
-
-            if (input.CheckMoveRight() && _player.Velocity.X < 20)
-            {
-                _player.Velocity += new Vector2(1, 0);
-                _player.Facing = Direction.Right;
-            }
-            else if (input.CheckMoveLeft() && _player.Velocity.X > -20)
-            {
-                _player.Velocity += new Vector2(-1, 0);
-                _player.Facing = Direction.Left;
-            }
-            else if (_player.Velocity.Equals(Vector2.Zero))
-            {
-                _player.Facing = Direction.Idle;
-            }
-            else
-            { 
-                if (_player.Velocity.X > 0)
-                    _player.Velocity -= new Vector2(1f, 0f);
-                else if (_player.Velocity.X < 0)
-                    _player.Velocity += new Vector2(1f, 0f);  
-            }
 
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
             _animController.Update(gameTime);
-
 
             _menuButton1Controller.Update(gameTime);
             _menuButton2Controller.Update(gameTime);

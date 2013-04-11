@@ -31,7 +31,7 @@ namespace GravTr0n
         public override void Initialize()
         {
             // TODO: Add your initialization code here
-            
+            KeyBindings.GenerateKeyBindingsFromXmlFile("Content/keybindings.xml");
 
             base.Initialize();
         }
@@ -66,6 +66,22 @@ namespace GravTr0n
         public bool CheckJump()
         {
             if (KeyBindings.IsEventActivated(Events.Jump))
+                return true;
+            else
+                return false;
+        }
+
+        public bool CheckRestart()
+        {
+            if (KeyBindings.IsEventActivated(Events.Restart))
+                return true;
+            else
+                return false;
+        }
+
+        public bool CheckQuit()
+        {
+            if (KeyBindings.IsEventActivated(Events.Quit))
                 return true;
             else
                 return false;

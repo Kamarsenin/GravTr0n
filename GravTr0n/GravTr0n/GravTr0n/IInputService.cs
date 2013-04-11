@@ -5,10 +5,12 @@ using System.Text;
 
 namespace GravTr0n
 {
-    interface IInputService
+    public interface IInputService
     {
         bool CheckMoveLeft();
         bool CheckMoveRight();
         bool CheckJump();
+        bool CheckRestart();
+        bool CheckQuit();
     }
 }

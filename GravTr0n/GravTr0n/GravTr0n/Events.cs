@@ -9,6 +9,9 @@ namespace GravTr0n
     {
         MoveLeft,
         MoveRight,
-        Jump
+        Jump,
+        Restart,
+        Quit,
+        Idle
     }
 }

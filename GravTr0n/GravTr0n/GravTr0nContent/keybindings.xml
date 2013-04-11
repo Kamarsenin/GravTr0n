@@ -3,5 +3,7 @@
   <MoveLeft>A</MoveLeft>
   <MoveRight>D</MoveRight>
   <Jump>W</Jump>
+  <Restart>R</Restart>
+  <Quit>Escape</Quit>
 </KeyBindings>
 
