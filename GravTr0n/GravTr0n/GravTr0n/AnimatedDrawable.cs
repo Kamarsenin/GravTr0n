@@ -27,7 +27,7 @@ namespace GravTr0n
             }
         }
 
-        public AnimatedDrawable(Texture2D art, int numberOfFrames) : base(art)
+        public AnimatedDrawable(Texture2D art, int numberOfFrames, Rectangle source) : base(art, source)
         {
             StartingOffset = Point.Zero;
             NumberOfFrames = numberOfFrames;

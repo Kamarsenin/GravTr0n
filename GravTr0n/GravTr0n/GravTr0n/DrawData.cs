@@ -41,10 +41,10 @@ namespace GravTr0n
             }
         }
 
-        public DrawData(Texture2D art)
+        public DrawData(Texture2D art, Rectangle source)
         {
             Art = art;
-            Source = new Rectangle(0, 0, 100, 117);
+            Source = source;
             Destination = Source;
             BlendColor = Color.White;
         }

@@ -68,8 +68,10 @@ namespace GravTr0n
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2D _playerArt = Content.Load<Texture2D>("spritesheettest1");
-            _player = new Player(_playerArt, 5);
 
+            Rectangle playerRect = new Rectangle(0, 0, 100, 117);
+            _player = new Player(_playerArt, 5, playerRect);
+            
             IDrawSprites renderer = (IDrawSprites) Services.GetService(typeof(IDrawSprites));
             renderer.AddDrawable(_player);
 
@@ -79,15 +81,15 @@ namespace GravTr0n
 
             Texture2D _buttonArt = Content.Load<Texture2D>("meny");
 
-            _menuButton1 = new AnimatedDrawable(_buttonArt, 5);
-            _menuButton1.Source = new Rectangle(0, 0, 143, 98);
-            _menuButton1.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 98, GraphicsDevice.Viewport.Height / 2 - 143);
+            Rectangle menuButton1Rect = new Rectangle(0, 0, 143, 98);
+            _menuButton1 = new AnimatedDrawable(_buttonArt, 5, menuButton1Rect);
+            _menuButton1.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 70, GraphicsDevice.Viewport.Height / 2 - 143);
             renderer.AddDrawable(_menuButton1);
             _menuButton1Controller = new AnimationController(_menuButton1, 0.1f);
-            
-            _menuButton2 = new AnimatedDrawable(_buttonArt, 5);
-            _menuButton2.Source = new Rectangle(0, _menuButton1.Source.Height, 143, 98);
-            _menuButton2.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 98, (GraphicsDevice.Viewport.Height / 2 - 98));
+
+            Rectangle menuButton2Rect = new Rectangle(0, 0, 143, 98);
+            _menuButton2 = new AnimatedDrawable(_buttonArt, 5, menuButton2Rect);
+            _menuButton2.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 70, (GraphicsDevice.Viewport.Height / 2 - 45));
             renderer.AddDrawable(_menuButton2);
             _menuButton2Controller = new AnimationController(_menuButton2, 0.1f);
             _menuButton2.StartingOffset = new Point(_menuButton2.StartingOffset.X, 98);

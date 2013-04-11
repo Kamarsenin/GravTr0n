@@ -60,7 +60,7 @@ namespace GravTr0n
         }
         private Direction _facing;
 
-        public Player(Texture2D art, int numberOfFrames) : base(art, numberOfFrames)
+        public Player(Texture2D art, int numberOfFrames, Rectangle source) : base(art, numberOfFrames, source)
         {
             Facing = Direction.Idle;
         }
