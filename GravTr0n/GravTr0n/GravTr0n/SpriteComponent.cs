@@ -73,10 +73,10 @@ namespace GravTr0n
         {
             base.Draw(gameTime);
             _drawer.Begin();
-            foreach (DrawData drawData in _toDraw)
-            {
-                drawElement(drawData);
-            }
+                foreach (DrawData drawData in _toDraw)
+                {
+                    drawElement(drawData);
+                }
             _drawer.End();
         }
 
