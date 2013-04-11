@@ -28,6 +28,7 @@ namespace GravTr0n
         private AnimatedDrawable _menuButton2;
         MouseState mouseState;
         MouseState previousMouseState;
+        IInputService input;
         GameState gameState;
         enum GameState
         {
@@ -40,8 +41,11 @@ namespace GravTr0n
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             SpriteComponent renderer = new SpriteComponent(this);
+            InputManager input = new InputManager(this);
             Components.Add(renderer);
+            Components.Add(input);
             Services.AddService(typeof(IDrawSprites), renderer);
+            Services.AddService(typeof(IInputService), input);
             _rotation = 0.4f;
         }
 
@@ -56,6 +60,7 @@ namespace GravTr0n
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
             gameState = GameState.StartMenu;
+            KeyBindings.GenerateKeyBindingsFromXmlFile("Content/keybindings.xml");
             base.Initialize();
         }
 
@@ -119,15 +124,17 @@ namespace GravTr0n
                 this.Exit();
             KeyboardState buttonpenis = Keyboard.GetState();
 
+            input = (IInputService)Services.GetService(typeof(IInputService));
+
             if (buttonpenis.IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            if (buttonpenis.IsKeyDown(Keys.D) && _player.Velocity.X < 20)
+            if (input.CheckMoveRight() && _player.Velocity.X < 20)
             {
                 _player.Velocity += new Vector2(1, 0);
                 _player.Facing = Direction.Right;
             }
-            else if (buttonpenis.IsKeyDown(Keys.A) && _player.Velocity.X > -20)
+            else if (input.CheckMoveLeft() && _player.Velocity.X > -20)
             {
                 _player.Velocity += new Vector2(-1, 0);
                 _player.Facing = Direction.Left;

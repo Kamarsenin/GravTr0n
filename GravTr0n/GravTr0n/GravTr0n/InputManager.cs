@@ -31,7 +31,7 @@ namespace GravTr0n
         public override void Initialize()
         {
             // TODO: Add your initialization code here
-            KeyBindings.GenerateKeyBindingsFromXmlFile("Content/keybindings.xml");
+            
 
             base.Initialize();
         }

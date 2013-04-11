@@ -74,7 +74,7 @@ namespace GravTr0n
                 {
                     if (key == binding.key)
                     {
-                        System.Console.WriteLine(binding.key);
+                        //System.Console.WriteLine(binding.key);
                         activatedEvents.Add(binding.eventName);
                         break;
                     }
