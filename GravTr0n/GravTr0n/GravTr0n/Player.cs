@@ -7,6 +7,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GravTr0n
 {
+    public enum Direction
+    {
+        Left,
+        Right,
+        InAir,
+        Idle
+    }
+
     public class Player
     {
         public Texture2D Art { get; set; }
@@ -32,22 +40,44 @@ namespace GravTr0n
                 _position.Y = _destination.Y;
             }
         }
-        public Rectangle CollitionRectangle { get; set; }
+        public Rectangle Source { get; set; }
         public Color BlendColor { get; set; }
+        public Direction Faceing { get; set; }
 
         private Rectangle _destination;
         private Vector2 _position;
 
-        public Player(Texture2D art)
-            : this(art, art.Bounds)
-        {}
-
-        public Player(Texture2D art, Rectangle destination)
+        public Player(Texture2D art, int numberOfFrames)
         {
             Art = art;
-            Destination = destination;
-            CollitionRectangle = art.Bounds;
+            Source = art.Bounds;
+            Destination = Source;
             BlendColor = Color.White;
+            Faceing = Direction.Right;
+            NumberOfFrames = numberOfFrames;
+            StartingOffset = Point.Zero;
         }
+
+
+        //Animation
+
+        public int NumberOfFrames { get; set; }
+        public int CurrentFrame
+        {
+            get { return CurrentFrame; }
+            set
+            {
+                CurrentFrame = value;
+                if (CurrentFrame >= NumberOfFrames)
+                    CurrentFrame = 0;
+                Rectangle newSource = Source;
+                newSource.X = StartingOffset.X + CurrentFrame * newSource.Width;
+                Source = newSource;
+            }
+        }
+
+        public Point StartingOffset { get; set; }
+
+
     }
 }
