@@ -41,7 +41,7 @@ namespace GravTr0n
         protected override void Initialize()
         {
 
-            _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width/2, GraphicsDevice.Viewport.Height/2));
+           
             // TODO: Add your initialization logic here
             base.Initialize();
         }
@@ -61,8 +61,9 @@ namespace GravTr0n
             _player.Destination = new Rectangle(0, 0, 100, 117);
 
             IDrawSprites renderer = (IDrawSprites)
-                Services.GetService(typeof(IDrawSprites));
+             Services.GetService(typeof(IDrawSprites));
             renderer.AddDrawable(_player);
+            _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
         }
 
         /// <summary>
@@ -84,16 +85,13 @@ namespace GravTr0n
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-<<<<<<< HEAD
+
 
             KeyboardState buttonpenis = Keyboard.GetState();
 
             if (buttonpenis.IsKeyDown(Keys.Escape))
                 this.Exit();
-
-=======
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
->>>>>>> ny camera class
             // TODO: Add your update logic here
 
             base.Update(gameTime);

@@ -20,12 +20,8 @@ namespace GravTr0n
 
         public void Update(GameTime gameTime, float rotation, Vector2 position, float zoom)
         {
-            Transform = Matrix.CreateTranslation(position.X, position.Y, 0) *
-                        Matrix.CreateTranslation(Viewport.Width, Viewport.Height, 0)
-                /*
-                        Matrix.CreateRotationZ(rotation) *
-                        Matrix.CreateScale(zoom) *
-                       */;
+            Transform = Matrix.CreateTranslation((float)position.X, (float)position.Y, 0) *
+                        Matrix.CreateTranslation(Viewport.Width, Viewport.Height, 0);
         }
     }
 }
