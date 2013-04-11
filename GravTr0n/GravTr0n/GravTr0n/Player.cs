@@ -56,6 +56,7 @@ namespace GravTr0n
             Faceing = Direction.Right;
             NumberOfFrames = numberOfFrames;
             StartingOffset = Point.Zero;
+            _currentFrame = 0;
         }
 
 
@@ -64,17 +65,19 @@ namespace GravTr0n
         public int NumberOfFrames { get; set; }
         public int CurrentFrame
         {
-            get { return CurrentFrame; }
+            get { return _currentFrame; }
             set
             {
-                CurrentFrame = value;
+                _currentFrame = value;
                 if (CurrentFrame >= NumberOfFrames)
                     CurrentFrame = 0;
                 Rectangle newSource = Source;
-                newSource.X = StartingOffset.X + CurrentFrame * newSource.Width;
+                newSource.X = StartingOffset.X + _currentFrame * newSource.Width;
                 Source = newSource;
             }
         }
+
+        private int _currentFrame;
 
         public Point StartingOffset { get; set; }
 
