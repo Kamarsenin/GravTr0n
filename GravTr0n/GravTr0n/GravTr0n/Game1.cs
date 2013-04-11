@@ -60,8 +60,9 @@ namespace GravTr0n
             _player.Destination = new Rectangle(0, 0, 100, 117);
 
             IDrawSprites renderer = (IDrawSprites)
-                Services.GetService(typeof(IDrawSprites));
+            Services.GetService(typeof(IDrawSprites));
             renderer.AddDrawable(_player);
+
             _animController = new PlayerAnimationController(_player, 0.3f);
 
             _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
@@ -92,8 +93,24 @@ namespace GravTr0n
             if (buttonpenis.IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            if (buttonpenis.IsKeyDown(Keys.D))
+            {
+                _player.Velocity = new Vector2(4, 0);
+            }
+            else if (buttonpenis.IsKeyDown(Keys.A))
+            {
+                _player.Velocity = new Vector2(-4, 0);
+            }
+            else
+            {
+                _player.Velocity = new Vector2(0, 0);
+            }
+
+
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
             _animController.Update(gameTime);
+
+            _player.Update();
 
             base.Update(gameTime);
         }

@@ -16,8 +16,19 @@ namespace GravTr0n
     }
 
     public class Player
-    {
+    {   
+        // MORTEN SITT
+        public Vector2 Velocity { get; set; }
+        // MORTEN SITT SLUTT
+
+        private Rectangle _destination;
+        private Vector2 _position;
+
         public Texture2D Art { get; set; }
+        public Rectangle Source { get; set; }
+        public Color BlendColor { get; set; }
+        // Which way am I facing?
+        public Direction Facing { get; set; }
 
         public Vector2 Position 
         {
@@ -40,28 +51,10 @@ namespace GravTr0n
                 _position.Y = _destination.Y;
             }
         }
-        public Rectangle Source { get; set; }
-        public Color BlendColor { get; set; }
-        public Direction Faceing { get; set; }
-
-        private Rectangle _destination;
-        private Vector2 _position;
-
-        public Player(Texture2D art, int numberOfFrames)
-        {
-            Art = art;
-            Source = art.Bounds;
-            Destination = Source;
-            BlendColor = Color.White;
-            Faceing = Direction.Right;
-            NumberOfFrames = numberOfFrames;
-            StartingOffset = Point.Zero;
-            _currentFrame = 0;
-        }
-
 
         //Animation
-
+        private int _currentFrame;
+        public Point StartingOffset { get; set; }
         public int NumberOfFrames { get; set; }
         public int CurrentFrame
         {
@@ -77,10 +70,21 @@ namespace GravTr0n
             }
         }
 
-        private int _currentFrame;
+        public Player(Texture2D art, int numberOfFrames)
+        {
+            Art = art;
+            Source = art.Bounds;
+            Destination = Source;
+            BlendColor = Color.White;
+            Facing = Direction.Right;
+            NumberOfFrames = numberOfFrames;
+            StartingOffset = Point.Zero;
+            _currentFrame = 0;
+        }
 
-        public Point StartingOffset { get; set; }
-
-
+        public void Update()
+        {
+            Position += Velocity;
+        }
     }
 }
