@@ -9,5 +9,6 @@ namespace GravTr0n
     {
         void AddDrawable(DrawData drawable);
         void RemoveDrawable(DrawData drawable);
+        void ClearDrawable();
     }
 }

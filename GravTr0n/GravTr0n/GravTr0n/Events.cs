@@ -12,6 +12,7 @@ namespace GravTr0n
         Jump,
         Restart,
         Quit,
+        Pause,
         Idle
     }
 }

@@ -86,5 +86,13 @@ namespace GravTr0n
             else
                 return false;
         }
+
+        public bool CheckPause()
+        {
+            if (KeyBindings.IsEventActivated(Events.Pause))
+                return true;
+            else
+                return false;
+        }
     }
 }

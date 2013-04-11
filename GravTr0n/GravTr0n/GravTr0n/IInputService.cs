@@ -12,5 +12,6 @@ namespace GravTr0n
         bool CheckJump();
         bool CheckRestart();
         bool CheckQuit();
+        bool CheckPause();
     }
 }

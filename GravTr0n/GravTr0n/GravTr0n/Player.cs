@@ -12,6 +12,8 @@ namespace GravTr0n
     {   
         // MORTEN SITT
         public Vector2 Velocity { get; set; }
+        private Vector2 _resistance;
+        private float _acceleration;
         private IInputService _input;
         // MORTEN SITT SLUTT
 
@@ -58,6 +60,8 @@ namespace GravTr0n
             : base(art, numberOfFrames, source)
         {
             Facing = Events.Idle;
+            _resistance = new Vector2(1, 0);
+            _acceleration = 0.2f;
             _input = input;
         }
 
@@ -65,12 +69,12 @@ namespace GravTr0n
         {
             if (_input.CheckMoveRight() && Velocity.X < 20)
             {
-                Velocity += new Vector2(1, 0);
+                Velocity *= _acceleration;
                 Facing = Events.MoveRight;
             }
             else if (_input.CheckMoveLeft() && Velocity.X > -20)
             {
-                Velocity += new Vector2(-1, 0);
+                Velocity *= _acceleration;
                 Facing = Events.MoveLeft;
             }
             else if (Velocity.Equals(Vector2.Zero))
@@ -81,13 +85,12 @@ namespace GravTr0n
             {
                 if (Velocity.X > 0)
                     // Resistance
-                    Velocity -= new Vector2(1f, 0f);
+                    Velocity -= _resistance;
                 else if (Velocity.X < 0)
-                    Velocity += new Vector2(1f, 0f);
+                    Velocity += _resistance;
             }
 
             Position += Velocity;
-            
         }
     }
 }

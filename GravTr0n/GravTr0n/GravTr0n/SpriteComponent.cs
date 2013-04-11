@@ -47,6 +47,11 @@ namespace GravTr0n
             _toDraw.Remove(toRemove);
         }
 
+        public void ClearDrawable()
+        {
+            _toDraw.Clear();
+        }
+
         /// <summary>
         /// Allows the game component to perform any initialization it needs to before starting
         /// to run.  This is where it can query for any required services and load content.
