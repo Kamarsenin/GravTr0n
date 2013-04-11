@@ -56,8 +56,7 @@ namespace GravTr0n
             Texture2D _playerArt = Content.Load<Texture2D>("spritesheettest1");
             _player = new Player(_playerArt, 5);
 
-            IDrawSprites renderer = (IDrawSprites)
-            Services.GetService(typeof(IDrawSprites));
+            IDrawSprites renderer = (IDrawSprites) Services.GetService(typeof(IDrawSprites));
             renderer.AddDrawable(_player);
 
             _animController = new PlayerAnimationController(_player, 0.3f);
