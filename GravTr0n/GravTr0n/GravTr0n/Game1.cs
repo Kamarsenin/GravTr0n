@@ -93,14 +93,17 @@ namespace GravTr0n
             if (buttonpenis.IsKeyDown(Keys.D))
             {
                 _player.Velocity = new Vector2(4, 0);
+                _player.Facing = Direction.Right;
             }
             else if (buttonpenis.IsKeyDown(Keys.A))
             {
                 _player.Velocity = new Vector2(-4, 0);
+                _player.Facing = Direction.Left;
             }
             else
             {
                 _player.Velocity = new Vector2(0, 0);
+                _player.Facing = Direction.Idle;
             }
 
 

@@ -35,26 +35,33 @@ namespace GravTr0n
             }
             set
             {
-                _facing = value;
-                int temp = 2;
-                if (_facing == Direction.Idle)
+                //Kun hvis endret
+                if (_facing != value)
                 {
-                    temp = 2;
-                }
-                else if (_facing == Direction.Right)
-                {
-                    temp = 0;
-                }
-                else if (_facing == Direction.Left)
-                {
-                    temp = 1;
-                }
-                else if (_facing == Direction.InAir)
-                {
-                    temp = 3;
-                }
+                    _facing = value;
+                    int temp = 2;
+                    if (_facing == Direction.Idle)
+                    {
+                        temp = 2;
+                    }
+                    else if (_facing == Direction.Right)
+                    {
+                        temp = 0;
+                    }
+                    else if (_facing == Direction.Left)
+                    {
+                        temp = 1;
+                    }
+                    else if (_facing == Direction.InAir)
+                    {
+                        temp = 3;
+                    }
 
-                StartingOffset = new Point(StartingOffset.X, Destination.Height * temp);
+                    StartingOffset = new Point(StartingOffset.X, Destination.Height * temp);
+
+                    //Nullstill frames
+                    CurrentFrame = 0;
+                }
             }
         }
         private Direction _facing;
@@ -107,8 +114,8 @@ namespace GravTr0n
             Destination = Source;
             BlendColor = Color.White;
             StartingOffset = Point.Zero;
-            Facing = Direction.Idle;
             NumberOfFrames = numberOfFrames;
+            Facing = Direction.Idle;
             CurrentFrame = 0;
         }
 
