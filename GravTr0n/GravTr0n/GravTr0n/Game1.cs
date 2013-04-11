@@ -92,6 +92,16 @@ namespace GravTr0n
             if (buttonpenis.IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            if (buttonpenis.IsKeyDown(Keys.D))
+            {
+
+            }
+            else if (buttonpenis.IsKeyDown(Keys.A))
+            {
+
+            }
+
+
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
             _animController.Update(gameTime);
 

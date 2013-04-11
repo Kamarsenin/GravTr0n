@@ -9,6 +9,7 @@ namespace GravTr0n
     public class PlayerAnimationController
     {
         public Player _player;
+        // time between frames => Change to increase/decrease
         public float StepTime { get; set; }
         private float _timer;
 
