@@ -41,8 +41,6 @@ namespace GravTr0n
         /// </summary>
         protected override void Initialize()
         {
-
-            _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width/2, GraphicsDevice.Viewport.Height/2));
             // TODO: Add your initialization logic here
             base.Initialize();
         }
@@ -65,6 +63,8 @@ namespace GravTr0n
                 Services.GetService(typeof(IDrawSprites));
             renderer.AddDrawable(_player);
             _animController = new PlayerAnimationController(_player, 0.3f);
+
+            _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
         }
 
         /// <summary>
