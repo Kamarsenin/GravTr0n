@@ -22,8 +22,19 @@ namespace GravTr0n
         private Camera _camera;
         private float _rotation;
         private PlayerAnimationController _animController;
+        private PlayerAnimationController _menuButton1Controller;
+        private PlayerAnimationController _menuButton2Controller;
         private AnimatedDrawable _menuButton1;
         private AnimatedDrawable _menuButton2;
+        MouseState mouseState;
+        MouseState previousMouseState;
+        GameState gameState;
+        enum GameState
+        {
+            StartMenu,
+            Loading,
+            Playing
+        }
 
         public Game1()
         {
@@ -44,6 +55,7 @@ namespace GravTr0n
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            IsMouseVisible = true;
             base.Initialize();
         }
 
@@ -67,19 +79,18 @@ namespace GravTr0n
 
             Texture2D _buttonArt = Content.Load<Texture2D>("meny");
 
-            _menuButton1 = new AnimatedDrawable();
-            _menuButton1.Art = _buttonArt;
-            _menuButton1.NumberOfFrames = 5;
+            _menuButton1 = new AnimatedDrawable(_buttonArt, 5);
             _menuButton1.Source = new Rectangle(0, 0, 143, 98);
             _menuButton1.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 98, GraphicsDevice.Viewport.Height / 2 - 143);
             renderer.AddDrawable(_menuButton1);
-
-            _menuButton2 = new AnimatedDrawable();
-            _menuButton2.Art = _buttonArt;
-            _menuButton2.NumberOfFrames = 5;
+            _menuButton1Controller = new PlayerAnimationController(_menuButton1, 0.1f);
+            
+            _menuButton2 = new AnimatedDrawable(_buttonArt, 5);
             _menuButton2.Source = new Rectangle(0, _menuButton1.Source.Height, 143, 98);
             _menuButton2.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 98, (GraphicsDevice.Viewport.Height / 2 - 45));
             renderer.AddDrawable(_menuButton2);
+            _menuButton2Controller = new PlayerAnimationController(_menuButton2, 0.1f);
+            
         }
 
         /// <summary>
@@ -132,8 +143,22 @@ namespace GravTr0n
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
             _animController.Update(gameTime);
 
-            _player.Update();
+            _menuButton1Controller.Update(gameTime);
+            _menuButton2Controller.Update(gameTime);
 
+            _player.Update();
+            
+            mouseState = Mouse.GetState();
+            if (previousMouseState.LeftButton == ButtonState.Pressed &&
+                mouseState.LeftButton == ButtonState.Released)
+            {
+                MouseClicked(mouseState.X, mouseState.Y);
+            }
+            previousMouseState = mouseState;
+            if (gameState == GameState.Playing)
+            {
+                //BYTTE UT SPRITES
+            }
             base.Update(gameTime);
         }
 
@@ -148,6 +173,25 @@ namespace GravTr0n
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+        void MouseClicked(int x, int y)
+        {
+            Rectangle mouseClickRect = new Rectangle(x, y, 10, 10);
+            if (gameState == GameState.StartMenu)
+            {
+                Rectangle menuButton1Rect = new Rectangle((int)_menuButton1.Destination.X, (int)_menuButton1.Destination.Y,
+                                                                143, 98);
+                Rectangle menuButton2Rect = new Rectangle((int)_menuButton2.Destination.X, (int)_menuButton2.Destination.Y,
+                                                                143, 98);
+                if (mouseClickRect.Intersects(menuButton1Rect))
+                {
+                    gameState = GameState.Playing;
+                }
+                else if (mouseClickRect.Intersects(menuButton2Rect))
+                {
+                    this.Exit();
+                }
+            }
         }
     }
 }
