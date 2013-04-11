@@ -3,9 +3,6 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -127,7 +124,6 @@ namespace GravTr0n
             previousMouseState = mouseState;
             if (gameState == GameState.Playing && isLoading)
             {
-                test = new Game1();
                 isLoading = false;
             }
             base.Update(gameTime);
