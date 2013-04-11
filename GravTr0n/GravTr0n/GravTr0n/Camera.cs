@@ -7,20 +7,25 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GravTr0n
 {
-    class Camera
+    public class Camera
     {
-        public Vector2 Position { get; set; }
-        private Viewport _viewPort;
-        
+        public Matrix Transform { get; private set; }
+        public Viewport Viewport { get; private set; }
 
-        public Camera(Viewport viewPort)
+        public Camera(Viewport viewport)
         {
-            this._viewPort = viewPort;
-            Position = Vector2.Zero;
+            Transform = Matrix.Identity;
+            Viewport = viewport;
         }
-        public Matrix GetViewPortMatrix()
+
+        public void Update(GameTime gameTime, float rotation, Vector2 position, float zoom)
         {
-            return Matrix.CreateTranslation(new Vector3(-Position, 0f));
+            Transform = Matrix.CreateTranslation(position.X, position.Y, 0) *
+                        Matrix.CreateTranslation(Viewport.Width, Viewport.Height, 0)
+                /*
+                        Matrix.CreateRotationZ(rotation) *
+                        Matrix.CreateScale(zoom) *
+                       */;
         }
     }
 }

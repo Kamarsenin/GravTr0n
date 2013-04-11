@@ -19,6 +19,8 @@ namespace GravTr0n
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Player _player;
+        private Camera _camera;
+        private float _rotation;
 
         public Game1()
         {
@@ -27,6 +29,7 @@ namespace GravTr0n
             SpriteComponent renderer = new SpriteComponent(this);
             Components.Add(renderer);
             Services.AddService(typeof(IDrawSprites), renderer);
+            _rotation = 0.4f;
         }
 
         /// <summary>
@@ -37,8 +40,9 @@ namespace GravTr0n
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
 
+            _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width/2, GraphicsDevice.Viewport.Height/2));
+            // TODO: Add your initialization logic here
             base.Initialize();
         }
 
@@ -80,12 +84,16 @@ namespace GravTr0n
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+<<<<<<< HEAD
 
             KeyboardState buttonpenis = Keyboard.GetState();
 
             if (buttonpenis.IsKeyDown(Keys.Escape))
                 this.Exit();
 
+=======
+            _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
+>>>>>>> ny camera class
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -98,6 +106,8 @@ namespace GravTr0n
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, _camera.Transform);
+            spriteBatch.End();
 
 
             // TODO: Add your drawing code here
