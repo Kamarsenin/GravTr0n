@@ -19,12 +19,9 @@ namespace GravTr0n
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Player _player;
-<<<<<<< HEAD
         private Camera _camera;
         private float _rotation;
-=======
         private PlayerAnimationController _animController;
->>>>>>> It Moves
 
         public Game1()
         {
@@ -89,21 +86,14 @@ namespace GravTr0n
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-<<<<<<< HEAD
 
             KeyboardState buttonpenis = Keyboard.GetState();
 
             if (buttonpenis.IsKeyDown(Keys.Escape))
                 this.Exit();
 
-<<<<<<< HEAD
-=======
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
->>>>>>> ny camera class
-            // TODO: Add your update logic here
-=======
             _animController.Update(gameTime);
->>>>>>> It Moves
 
             base.Update(gameTime);
         }
