@@ -17,6 +17,7 @@ namespace GravTr0n
     /// </summary>
     public class InputManager : GameComponent, IInputService
     {
+
         public InputManager(Game game)
             : base(game)
         {
@@ -30,6 +31,7 @@ namespace GravTr0n
         public override void Initialize()
         {
             // TODO: Add your initialization code here
+            KeyBindings.GenerateKeyBindingsFromXmlFile("Content/keybindings.xml");
 
             base.Initialize();
         }
@@ -41,8 +43,32 @@ namespace GravTr0n
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update code here
+            KeyBindings.GetActivatedEvents();
+            
+        }
 
-            base.Update(gameTime);
+        public bool CheckMoveLeft()
+        {
+            if (KeyBindings.IsEventActivated(Events.MoveLeft))
+                return true;
+            else
+                return false;
+        }
+
+        public bool CheckMoveRight()
+        {
+            if (KeyBindings.IsEventActivated(Events.MoveRight))
+                return true;
+            else
+                return false;
+        }
+
+        public bool CheckJump()
+        {
+            if (KeyBindings.IsEventActivated(Events.Jump))
+                return true;
+            else
+                return false;
         }
     }
 }
