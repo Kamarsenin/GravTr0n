@@ -9,22 +9,22 @@ namespace GravTr0n
     public class PlayerAnimationController
     {
         public Player _player;
-        private float _stepTime;
+        public float StepTime { get; set; }
         private float _timer;
 
         public PlayerAnimationController(Player Player,
             float animationStepTime)
         {
             _player = Player;
-            _stepTime = animationStepTime;
+            StepTime = animationStepTime;
         }
 
         public virtual void Update(GameTime gameTime)
         {
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (_timer >= _stepTime)
+            if (_timer >= StepTime)
             {
-                _timer -= _stepTime;
+                _timer -= StepTime;
                 _player.CurrentFrame++;
             }
         }
