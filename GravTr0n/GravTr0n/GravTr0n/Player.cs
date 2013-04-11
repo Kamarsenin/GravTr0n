@@ -47,17 +47,37 @@ namespace GravTr0n
         private Rectangle _destination;
         private Vector2 _position;
 
-        public Player(Texture2D art)
-            : this(art, art.Bounds)
-        {}
-
-        public Player(Texture2D art, Rectangle destination)
+        public Player(Texture2D art, int numberOfFrames)
         {
             Art = art;
             Source = art.Bounds;
-            Destination = destination;
+            Destination = Source;
             BlendColor = Color.White;
             Faceing = Direction.Right;
+            NumberOfFrames = numberOfFrames;
+            StartingOffset = Point.Zero;
         }
+
+
+        //Animation
+
+        public int NumberOfFrames { get; set; }
+        public int CurrentFrame
+        {
+            get { return CurrentFrame; }
+            set
+            {
+                CurrentFrame = value;
+                if (CurrentFrame >= NumberOfFrames)
+                    CurrentFrame = 0;
+                Rectangle newSource = Source;
+                newSource.X = StartingOffset.X + CurrentFrame * newSource.Width;
+                Source = newSource;
+            }
+        }
+
+        public Point StartingOffset { get; set; }
+
+
     }
 }
