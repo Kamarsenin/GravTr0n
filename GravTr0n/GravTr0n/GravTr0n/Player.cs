@@ -7,6 +7,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GravTr0n
 {
+    public enum Direction
+    {
+        Left,
+        Right,
+        InAir,
+        Idle
+    }
+
     public class Player
     {
         public Texture2D Art { get; set; }
@@ -32,8 +40,9 @@ namespace GravTr0n
                 _position.Y = _destination.Y;
             }
         }
-        public Rectangle CollitionRectangle { get; set; }
+        public Rectangle Source { get; set; }
         public Color BlendColor { get; set; }
+        public Direction Faceing { get; set; }
 
         private Rectangle _destination;
         private Vector2 _position;
@@ -45,9 +54,10 @@ namespace GravTr0n
         public Player(Texture2D art, Rectangle destination)
         {
             Art = art;
+            Source = art.Bounds;
             Destination = destination;
-            CollitionRectangle = art.Bounds;
             BlendColor = Color.White;
+            Faceing = Direction.Right;
         }
     }
 }

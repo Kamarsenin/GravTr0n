@@ -83,7 +83,7 @@ namespace GravTr0n
         protected virtual void drawElement(Player drawable)
         {
             _drawer.Draw(drawable.Art,drawable.Destination,
-                drawable.CollitionRectangle, Color.White);
+                drawable.Source, Color.White);
         }
     }
 }

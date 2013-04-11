@@ -50,8 +50,11 @@ namespace GravTr0n
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Texture2D _playerArt = Content.Load<Texture2D>("spritesheettest1");
+            _player = new Player(_playerArt);
 
-            _player = new Player(Content.Load<Texture2D>("spritesheettest1"));
+            _player.Source = new Rectangle(0, 0, 100, 117);
+            _player.Destination = new Rectangle(0, 0, 100, 117);
 
             IDrawSprites renderer = (IDrawSprites)
                 Services.GetService(typeof(IDrawSprites));
