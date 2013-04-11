@@ -32,7 +32,6 @@ namespace GravTr0n
         enum GameState
         {
             StartMenu,
-            Loading,
             Playing
         }
 
@@ -56,6 +55,7 @@ namespace GravTr0n
         {
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
+            gameState = GameState.StartMenu;
             base.Initialize();
         }
 
@@ -72,7 +72,8 @@ namespace GravTr0n
             Rectangle playerRect = new Rectangle(0, 0, 100, 117);
             _player = new Player(_playerArt, 5, playerRect);
             
-            IDrawSprites renderer = (IDrawSprites) Services.GetService(typeof(IDrawSprites));
+            IDrawSprites renderer = (IDrawSprites) Services.GetService(typeof(IDrawSprites));    
+            
             renderer.AddDrawable(_player);
 
             _animController = new AnimationController(_player, 0.3f);
@@ -84,15 +85,17 @@ namespace GravTr0n
             Rectangle menuButton1Rect = new Rectangle(0, 0, 143, 98);
             _menuButton1 = new AnimatedDrawable(_buttonArt, 5, menuButton1Rect);
             _menuButton1.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 70, GraphicsDevice.Viewport.Height / 2 - 143);
-            renderer.AddDrawable(_menuButton1);
             _menuButton1Controller = new AnimationController(_menuButton1, 0.1f);
 
             Rectangle menuButton2Rect = new Rectangle(0, 0, 143, 98);
             _menuButton2 = new AnimatedDrawable(_buttonArt, 5, menuButton2Rect);
             _menuButton2.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 70, (GraphicsDevice.Viewport.Height / 2 - 45));
-            renderer.AddDrawable(_menuButton2);
             _menuButton2Controller = new AnimationController(_menuButton2, 0.1f);
             _menuButton2.StartingOffset = new Point(_menuButton2.StartingOffset.X, 98);
+
+            renderer.AddDrawable(_menuButton1);
+            renderer.AddDrawable(_menuButton2);    
+            
         }
 
         /// <summary>
@@ -114,7 +117,6 @@ namespace GravTr0n
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
             KeyboardState buttonpenis = Keyboard.GetState();
 
             if (buttonpenis.IsKeyDown(Keys.Escape))
@@ -145,11 +147,11 @@ namespace GravTr0n
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
             _animController.Update(gameTime);
 
+
             _menuButton1Controller.Update(gameTime);
             _menuButton2Controller.Update(gameTime);
 
             _player.Update();
-            
             mouseState = Mouse.GetState();
             if (previousMouseState.LeftButton == ButtonState.Pressed &&
                 mouseState.LeftButton == ButtonState.Released)
@@ -159,7 +161,7 @@ namespace GravTr0n
             previousMouseState = mouseState;
             if (gameState == GameState.Playing)
             {
-                //BYTTE UT SPRITES
+                
             }
             base.Update(gameTime);
         }

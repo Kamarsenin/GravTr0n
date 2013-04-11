@@ -29,7 +29,6 @@ namespace GravTr0n
                 _destination.Y = (int)_position.Y;
             }
         }
-
         public Rectangle Destination
         {
             get { return _destination; }
