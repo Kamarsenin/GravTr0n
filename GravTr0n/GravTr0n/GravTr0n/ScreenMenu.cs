@@ -25,7 +25,6 @@ namespace GravTr0n
         GameState gameState;
         private Player _startButton;
         private Player _exitButton;
-        Game1 test;
         public enum GameState
         {
             StartMenu,
