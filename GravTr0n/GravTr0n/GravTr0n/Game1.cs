@@ -19,8 +19,12 @@ namespace GravTr0n
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Player _player;
+<<<<<<< HEAD
         private Camera _camera;
         private float _rotation;
+=======
+        private PlayerAnimationController _animController;
+>>>>>>> It Moves
 
         public Game1()
         {
@@ -63,7 +67,11 @@ namespace GravTr0n
             IDrawSprites renderer = (IDrawSprites)
              Services.GetService(typeof(IDrawSprites));
             renderer.AddDrawable(_player);
+<<<<<<< HEAD
             _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
+=======
+            _animController = new PlayerAnimationController(_player, 0.3f);
+>>>>>>> d98d7b6f5362a5c4beb12a33210d88958849ae9e
         }
 
         /// <summary>
@@ -91,8 +99,17 @@ namespace GravTr0n
 
             if (buttonpenis.IsKeyDown(Keys.Escape))
                 this.Exit();
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+=======
+>>>>>>> d98d7b6f5362a5c4beb12a33210d88958849ae9e
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
             // TODO: Add your update logic here
+=======
+            _animController.Update(gameTime);
+>>>>>>> It Moves
 
             base.Update(gameTime);
         }
