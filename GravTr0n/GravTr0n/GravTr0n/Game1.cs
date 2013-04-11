@@ -95,16 +95,22 @@ namespace GravTr0n
 
             if (buttonpenis.IsKeyDown(Keys.D))
             {
-
+                _player.Velocity = new Vector2(4, 0);
             }
             else if (buttonpenis.IsKeyDown(Keys.A))
             {
-
+                _player.Velocity = new Vector2(-4, 0);
+            }
+            else
+            {
+                _player.Velocity = new Vector2(0, 0);
             }
 
 
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
             _animController.Update(gameTime);
+
+            _player.Update();
 
             base.Update(gameTime);
         }

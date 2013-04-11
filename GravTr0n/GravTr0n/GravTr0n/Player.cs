@@ -18,7 +18,7 @@ namespace GravTr0n
     public class Player
     {   
         // MORTEN SITT
-        private Vector2 _velocity;
+        public Vector2 Velocity { get; set; }
         // MORTEN SITT SLUTT
 
         private Rectangle _destination;
@@ -80,6 +80,11 @@ namespace GravTr0n
             NumberOfFrames = numberOfFrames;
             StartingOffset = Point.Zero;
             _currentFrame = 0;
+        }
+
+        public void Update()
+        {
+            Position += Velocity;
         }
     }
 }
