@@ -71,6 +71,11 @@ namespace GravTr0n
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            KeyboardState buttonpenis = Keyboard.GetState();
+
+            if (buttonpenis.IsKeyDown(Keys.Escape))
+                this.Exit();
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
