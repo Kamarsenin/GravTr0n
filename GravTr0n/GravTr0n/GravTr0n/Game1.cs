@@ -56,9 +56,6 @@ namespace GravTr0n
             Texture2D _playerArt = Content.Load<Texture2D>("spritesheettest1");
             _player = new Player(_playerArt, 5);
 
-            _player.Source = new Rectangle(0, 0, 100, 117);
-            _player.Destination = new Rectangle(0, 0, 100, 117);
-
             IDrawSprites renderer = (IDrawSprites)
             Services.GetService(typeof(IDrawSprites));
             renderer.AddDrawable(_player);
@@ -96,10 +93,16 @@ namespace GravTr0n
             if (buttonpenis.IsKeyDown(Keys.D) && _player.Velocity.X < 20)
             {
                 _player.Velocity += new Vector2(1, 0);
+                _player.Facing = Direction.Right;
             }
             else if (buttonpenis.IsKeyDown(Keys.A) && _player.Velocity.X > -20)
             {
                 _player.Velocity += new Vector2(-1, 0);
+                _player.Facing = Direction.Left;
+            }
+            else if (_player.Velocity.Equals(Vector2.Zero))
+            {
+                _player.Facing = Direction.Idle;
             }
             else
             { 
@@ -107,8 +110,9 @@ namespace GravTr0n
                     _player.Velocity -= new Vector2(1f, 0f);
                 else if (_player.Velocity.X < 0)
                     _player.Velocity += new Vector2(1f, 0f);  
+                _player.Velocity = new Vector2(-4, 0);
+                
             }
-
 
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
             _animController.Update(gameTime);
