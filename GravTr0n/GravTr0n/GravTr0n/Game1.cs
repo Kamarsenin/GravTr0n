@@ -110,8 +110,6 @@ namespace GravTr0n
                     _player.Velocity -= new Vector2(1f, 0f);
                 else if (_player.Velocity.X < 0)
                     _player.Velocity += new Vector2(1f, 0f);  
-                _player.Velocity = new Vector2(-4, 0);
-                
             }
 
             _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
