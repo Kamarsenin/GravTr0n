@@ -176,6 +176,14 @@ namespace GravTr0n
                         _keyMenu.AddDraw(renderer);   
                     }
                 }
+                else if (gameState == GameState.KeyBindings)
+                {
+                    if (_gameStateCheck == 2)
+                    {
+                        _startMenu.RemoveDraw(renderer);
+                        _keyMenu.AddDraw(renderer);   
+                    }
+                }
                 else if (gameState == GameState.Quit)
                 {
                     this.Exit();
