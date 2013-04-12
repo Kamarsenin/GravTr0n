@@ -67,12 +67,12 @@ namespace GravTr0n
             if (mouseClickRect.Intersects(menuButton1Rect))
             {    
                 GameState = GameState.Playing;
-                GameStateCheck = 1;
+                GameStateCheck = 2;
             }
             else if (mouseClickRect.Intersects(menuButton2Rect))
             {
                 GameState = GameState.KeyBindings;
-                GameStateCheck = 2;
+                GameStateCheck = 1;
             }
             else if (mouseClickRect.Intersects(menuButton3Rect))
             {

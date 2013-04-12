@@ -26,26 +26,16 @@ namespace GravTr0n
         {
             // TODO: Construct any child components here
         }
-
-        /// <summary>
-        /// Allows the game component to perform any initialization it needs to before starting
-        /// to run.  This is where it can query for any required services and load content.
-        /// </summary>
+                
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
             KeyBindings.GenerateKeyBindingsFromXmlFile("Content/keybindings.xml");
             
             base.Initialize();
         }
 
-        /// <summary>
-        /// Allows the game component to update itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
             KeyBindings.GetActivatedEvents();
             _mouseStatePrevious = _mouseStateCurrent;
             _mouseStateCurrent = Mouse.GetState();
@@ -53,6 +43,7 @@ namespace GravTr0n
             
         }
 
+        // TO DO: Check if methods can be combined into one CheckEvent(Events event)
         public bool CheckMoveLeft()
         {
             if (KeyBindings.IsEventActivated(Events.MoveLeft))
