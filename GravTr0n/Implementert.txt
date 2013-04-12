@@ -1,0 +1,36 @@
+KVA HAR ME IMPLEMENTERT?
+5 PTS - Spillet har en egen implementasjon av en DrawablElement-klasse for å tegne
+		sprites med SpriteBatch.
+5 PTS - Systemet har en egen DrawableGameComponent implementasjon,
+		med tilhørende interface.
+10 PTS - Spillet støtter animasjon i samme system, hvor
+		AnimatedDrawableElement er en spesialisering av DrawableElement.
+		DrawableElement har da støtte for å bli oppdatert.
+5 PTS - Spillet benytter seg av Dictionary objekter for å enkelt spille
+		av animasjonssekvenser. Disse sekvensene har støtte for forskjellig antall
+		"frames" forskjellig størelse (fra animasjon til animasjon) og tid mellom
+		hvert bilde.
+10 PTS - Spilleren kan bevege en avatar rundt på et område som tar opp mer
+		enn en skjerm. "Kameraet" beveger seg for å holde spilleren innenfor vinduet.
+		
+2 PTS - Spillet kan kontrolleres med tastatur.
+5 PTS - Input systemet er en egen GameComponent med tilhørende interface,
+		som legges til og hentes ut ved hjelp av Services.
+7 PTS - Spiller kan endre tastaturoppsett / gamepad oppsett for hvordan
+		spillet kontrolleres (Hvilke knapper som benyttes).
+		
+5 PTS - Spillet benytter seg av kollisjonshåndtering ved hjelp av Rectangle, eller
+		sirkel kollisjon.
+5 PTS - Kollisjonsystemet er en egen GameComponent med tilhørende
+		interface, som legges til og hentes ut ved hjelp av Services.
+5 PTS - Kollisjonsystemet sørger for at man ikke får overlappende entiteter
+		som ender opp med å kollidere hver frame, feks ved å sette dem tilbake til
+		forrige gjeldende tilstand.
+3 PTS - Systemet tar hensyn til framerate ved hjelp av GameTime.
+2 PTS - Systemet har støtte for bevegelser i desimalform (Vector2).
+2 PTS - Spiller har forskjellig bevegelseshastighet, og akselerasjonsmengde
+		benyttes for å bytte mellom disse (Vector2 acceleration).
+		
+15 PTS - Spillet kan startes på nytt, avsluttes, bli pauset, tapt og vunnet.
+
+86 PTS TOTAL
