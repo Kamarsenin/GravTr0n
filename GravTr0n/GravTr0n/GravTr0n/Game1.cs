@@ -15,6 +15,7 @@ namespace GravTr0n
     {
         StartMenu,
         Playing,
+        KeyBindings,
         Quit
     }
     /// <summary>
@@ -41,7 +42,9 @@ namespace GravTr0n
         private StartMenu _startMenu;
         private int _screenWidth;
         private int _screenHeight;
-        
+
+        private KeyBindingsMenu _keyMenu;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -91,7 +94,9 @@ namespace GravTr0n
             _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
 
             Texture2D _buttonArt = Content.Load<Texture2D>("meny");
+            Texture2D _keysBindingArt = Content.Load<Texture2D>("keysSprite2");
 
+            _keyMenu = new KeyBindingsMenu(_keysBindingArt, _screenWidth, _screenHeight, gameState, _gameStateCheck);
             _startMenu = new StartMenu(_buttonArt, _screenWidth, _screenHeight, gameState, _gameStateCheck);   
         }
 
@@ -163,6 +168,14 @@ namespace GravTr0n
                     else
                     {
                         _player.Update(gameTime, input);
+                    }
+                }
+                else if (gameState == GameState.KeyBindings)
+                {
+                    if (_gameStateCheck == 2)
+                    {
+                        _startMenu.RemoveDraw(renderer);
+                        _keyMenu.AddDraw(renderer);   
                     }
                 }
                 else if (gameState == GameState.Quit)

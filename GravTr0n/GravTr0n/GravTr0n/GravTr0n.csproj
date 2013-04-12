@@ -114,6 +114,7 @@
     <Compile Include="AnimationController.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Camera2D.cs" />
+    <Compile Include="KeyBindingsMenu.cs" />
     <Compile Include="CollisionManager.cs" />
     <Compile Include="DrawData.cs" />
     <Compile Include="Events.cs" />
