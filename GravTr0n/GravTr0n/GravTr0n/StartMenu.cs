@@ -19,10 +19,10 @@ namespace GravTr0n
         {
             Rectangle menuButton1Rect = new Rectangle(0, 0, 143, 98);
             _menuButton1 = new AnimatedDrawable(buttonArt, 5, menuButton1Rect, 0.1f);
-            _menuButton1.Position = new Vector2(screenWidth / 2 - 70, screenHeight / 2 - 143);
+            _menuButton1.Position = new Vector2(screenWidth / 2 - 70, screenHeight / 2 - 45);
 
             _menuButton2 = new AnimatedDrawable(buttonArt, 5, menuButton1Rect, 0.1f);
-            _menuButton2.Position = new Vector2(screenWidth / 2 - 70, (screenHeight / 2 - 45));
+            _menuButton2.Position = new Vector2(screenWidth / 2 - 70, screenHeight / 2 - 45);
             _menuButton2.StartingOffset = new Point(_menuButton2.StartingOffset.X, 196);
 
             _menuButton3 = new AnimatedDrawable(buttonArt, 5, menuButton1Rect, 0.1f);

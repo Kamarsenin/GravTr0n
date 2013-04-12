@@ -28,7 +28,6 @@ namespace GravTr0n
 
         private Player _player;
         private Camera _camera;
-        private float _rotation;
 
         private GameState _gameState;
         private int _gameStateCheck;
@@ -61,7 +60,6 @@ namespace GravTr0n
             Services.AddService(typeof(IDrawSprites), renderer);
             Services.AddService(typeof(IInputService), input);
             Services.AddService(typeof(ICollisionService), collisionManager);
-            _rotation = 0.4f;
         }
 
         /// <summary>
@@ -82,6 +80,9 @@ namespace GravTr0n
             _screenWidth = GraphicsDevice.Viewport.Width;
             _screenHeight = GraphicsDevice.Viewport.Height;
 
+            _camera = new Camera(GraphicsDevice.Viewport);
+            Services.AddService(typeof(Camera), _camera);
+            
             base.Initialize();
         }
 
@@ -106,10 +107,6 @@ namespace GravTr0n
             Texture2D terrainArt = Content.Load<Texture2D>("spriteTerrain");
             _level01 = new Level01(terrainArt, _playerArt, _gameState, _gameStateCheck, _player);
             
-            _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
-
-             
-
         }
 
         /// <summary>
@@ -149,7 +146,7 @@ namespace GravTr0n
                     _gameStateCheck = 0;
                     _startMenu.GameStateCheck = _gameStateCheck;
                 }
-                else if (_gameState == GameState.StartMenu)
+                if (_gameState == GameState.StartMenu)
                 {
                     if (_gameStateCheck == 0)
                     {
@@ -170,12 +167,17 @@ namespace GravTr0n
                 }
                 else if (_gameState == GameState.Playing)
                 {
+                    SpriteComponent renderer = (SpriteComponent)Services.GetService(typeof(IDrawSprites));
+                    renderer.CameraOn = true;
+     
                     if (_gameStateCheck == 2)
                     {
                         _gameStateCheck = -1;
                         _startMenu.RemoveDraw(renderer);
                         _level01.AddDraw(renderer);
                     }
+                    _camera.Update(gameTime, _player);
+                    Window.Title = _camera.ToString() + " " + _player.ToString();
 
                     _level01.Update(collisionManager);
                     _player.Update(gameTime, input);
@@ -203,9 +205,7 @@ namespace GravTr0n
                 {
                     this.Exit();
                 }
-
-                _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
-                
+                 
                 base.Update(gameTime);
             }
         }
@@ -216,10 +216,6 @@ namespace GravTr0n
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, _camera.Transform);
-            spriteBatch.End();
-
             base.Draw(gameTime);
         }
         

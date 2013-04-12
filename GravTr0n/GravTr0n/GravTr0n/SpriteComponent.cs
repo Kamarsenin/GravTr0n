@@ -17,7 +17,9 @@ namespace GravTr0n
     public class SpriteComponent : DrawableGameComponent, IDrawSprites
     {
         private SpriteBatch _drawer;
-        
+        private Camera _camera;
+        public bool CameraOn { get; set; }
+
         protected List<DrawData> _toDraw = new List<DrawData>();
 
         public SpriteComponent(Game game)
@@ -30,8 +32,9 @@ namespace GravTr0n
         {
             base.LoadContent();
             _drawer = new SpriteBatch(Game.GraphicsDevice);
+            _camera = (Camera)Game.Services.GetService(typeof(Camera));
         }
-
+            
         public void AddDrawable(DrawData drawable)
         {
             if (drawable == null || _toDraw.Contains(drawable))
@@ -77,8 +80,16 @@ namespace GravTr0n
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            _drawer.Begin();
-                foreach (DrawData drawData in _toDraw)
+            GraphicsDevice.Clear(Color.White);
+            if (CameraOn)
+            {
+                _drawer.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, _camera.transform);
+            }
+            else
+            {
+                _drawer.Begin();
+            }
+            foreach (DrawData drawData in _toDraw)
                 {
                     drawElement(drawData);
                 }

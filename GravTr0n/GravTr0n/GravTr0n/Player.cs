@@ -106,12 +106,18 @@ namespace GravTr0n
             {
 
                 VelocityGravity += _gravityDirection * _acceleration * _deltaTime;
+
                 Velocity += VelocityGravity;
             }
 
             Position += Velocity;
 
             base.Update(gameTime);
+        }
+
+        public override String ToString()
+        {
+            return this.Position.ToString();
         }
 
         public bool IsCollidable()
