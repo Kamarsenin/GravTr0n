@@ -44,7 +44,7 @@ namespace GravTr0n
             _floor01.Position = new Vector2(0, 200);
             _levelObjects.Add(_floor01);
             _floor02 = new DrawData(_terrainArt, new Rectangle(0, 0, 67, 10));
-            _floor02.Position = new Vector2(68, 200);
+            _floor02.Position = new Vector2(67, 200);
             _levelObjects.Add(_floor02);
 
 
