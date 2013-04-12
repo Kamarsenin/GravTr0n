@@ -45,6 +45,7 @@ namespace GravTr0n
         private int _screenHeight;
 
         private KeyBindingsMenu _keyMenu;
+        private Level01 _level01;
 
         public Game1()
         {
@@ -93,17 +94,19 @@ namespace GravTr0n
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Texture2D _playerArt = Content.Load<Texture2D>("spritesheettest1");
 
-            Rectangle playerRect = new Rectangle(0, 0, 100, 117);
-            _player = new Player(_playerArt, 5, playerRect);  
-            
             Texture2D _buttonArt = Content.Load<Texture2D>("meny");
             Texture2D _keysBindingArt = Content.Load<Texture2D>("keysSprite2");
-
             _keyMenu = new KeyBindingsMenu(_keysBindingArt, _screenWidth, _screenHeight, _gameState, _gameStateCheck);
-            _startMenu = new StartMenu(_buttonArt, _screenWidth, _screenHeight, _gameState, _gameStateCheck);   
+            _startMenu = new StartMenu(_buttonArt, _screenWidth, _screenHeight, _gameState, _gameStateCheck);  
 
+            Texture2D _playerArt = Content.Load<Texture2D>("spritesheettest1");
+            Rectangle playerRect = new Rectangle(0, 0, 100, 117);
+            _player = new Player(_playerArt, 5, playerRect);
+
+            Texture2D terrainArt = Content.Load<Texture2D>("spriteTerrain");
+            _level01 = new Level01(terrainArt, _playerArt, _gameState, _gameStateCheck, _player);
+            
         }
 
         /// <summary>
@@ -148,8 +151,7 @@ namespace GravTr0n
                     if (_gameStateCheck == 0)
                     {
                         _gameStateCheck = -1;
-                        renderer.RemoveDrawable(_player);
-                        _keyMenu.RemoveDraw(renderer);
+                        renderer.ClearDrawable();
                         _startMenu.AddDraw(renderer);
                     }
                     
@@ -158,33 +160,46 @@ namespace GravTr0n
                     if (!_gameState.Equals(_startMenu.GameState))
                     {
                         _gameState = _startMenu.GameState;
-                        _gameStateCheck = _startMenu.GameStateCheck;                           
+                        _keyMenu.GameState = _gameState;
+                        _gameStateCheck = _startMenu.GameStateCheck;
+                        _keyMenu.GameStateCheck = _gameStateCheck; 
                     }
                 }
                 else if (_gameState == GameState.Playing)
                 {
                     SpriteComponent renderer = (SpriteComponent)Services.GetService(typeof(IDrawSprites));
                     renderer.CameraOn = true;
-                    if (_gameStateCheck == 1)
+     
+                    if (_gameStateCheck == 2)
                     {
                         _gameStateCheck = -1;
                         _startMenu.RemoveDraw(renderer);
-                        renderer.AddDrawable(_player);
+                        _level01.AddDraw(renderer);
                     }
                     _camera.Update(gameTime, _player);
                     Window.Title = _camera.ToString() + " " + _player.ToString();
+
+                    _level01.Update(collisionManager);
                     _player.Update(gameTime, input);
                     
                 }
                 else if (_gameState == GameState.KeyBindings)
                 {
-                    if (_gameStateCheck == 2)
+                    if (_gameStateCheck == 1)
                     {
                         _gameStateCheck = -1;
                         _startMenu.RemoveDraw(renderer);
                         _keyMenu.AddDraw(renderer);
                     }
                     _keyMenu.Update(gameTime, input);
+
+                    if (!_gameState.Equals(_keyMenu.GameState))
+                    {
+                        _gameState = _keyMenu.GameState;
+                        _startMenu.GameState = _gameState;
+                        _gameStateCheck = _keyMenu.GameStateCheck;
+                        _startMenu.GameStateCheck = _gameStateCheck;
+                    }
                 }
                 else if (_gameState == GameState.Quit)
                 {

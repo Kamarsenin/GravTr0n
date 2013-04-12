@@ -8,16 +8,17 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GravTr0n
 {
     
-    public class Player : AnimatedDrawable, ICharacter
+    public class Player : AnimatedDrawable, IIsCollidable
     {   
         // MORTEN SITT
         public Vector2 Velocity { get; set; }
+        public Vector2 VelocityGravity { get; set; }
         private Vector2 _resistance;
         private Vector2 _gravityDown;
-        private Vector2 _gravityDownVelocity;
         private Vector2 _gravityDirection;
         private float _acceleration;
-        private float _accelerationGravityDown;
+        private float _deltaTime;
+        private bool _isCollidable;
         //private IInputService _input;
         // MORTEN SITT SLUTT
 
@@ -68,12 +69,13 @@ namespace GravTr0n
             _acceleration = 0.2f;
             _gravityDown = new Vector2(0, 1);
             _gravityDirection = _gravityDown;
-            _accelerationGravityDown = 0.5f;
-            //_input = input;
+            _isCollidable = true;
         }
 
         public void Update(GameTime gameTime, IInputService input)
         {
+            _deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
             if (input.CheckMoveRight() && Velocity.X < 20)
             {
                 
@@ -98,13 +100,27 @@ namespace GravTr0n
                 else if (Velocity.X < 0)
                     Velocity += _resistance;
             }
+
+            if (VelocityGravity.Y < 10)
+            {
+                VelocityGravity += _gravityDirection * _acceleration * _deltaTime;
+
+                Velocity += VelocityGravity;
+            }
+
             Position += Velocity;
 
             base.Update(gameTime);
         }
+
         public override String ToString()
         {
             return this.Position.ToString();
+        }
+
+        public bool IsCollidable()
+        {
+            return _isCollidable;
         }
     }
 }

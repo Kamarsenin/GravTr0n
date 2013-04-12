@@ -8,43 +8,40 @@ namespace GravTr0n
 {
     class CollisionManager : GameComponent, ICollisionService
     {
-        private List<IIsCollidable> _collidables; 
+        //private List<IIsCollidable> _collidables; 
 
         public CollisionManager(Game game)
             : base(game)
         {
-            _collidables = new List<IIsCollidable>();
+            //_collidables = new List<IIsCollidable>();
         }
 
         public override void Initialize()
         {
-            _collidables = new List<IIsCollidable>();
+            //_collidables = new List<IIsCollidable>();
 
             base.Initialize();
         }
 
         public override void Update(GameTime gameTime)
         {
-            foreach (IIsCollidable item in _collidables)
-            {
-                                
-            }
+            
 
         }
 
-        public void AddCollidables(IIsCollidable collidableObject)
+        public bool IsCollision(Player player, DrawData item)
         {
-            _collidables.Add(collidableObject);
+            if (player.Destination.Intersects(item.Destination))
+                return true;
+            return false;
         }
 
-        public bool IsCollision()
+        public void ResolveCollision(Player player, DrawData item)
         {
-            return true;
-        }
-
-        public void ResolveCollision()
-        {
-
+            Rectangle overlap = Rectangle.Intersect(player.Destination, item.Destination);
+            player.Position -= new Vector2(overlap.X, overlap.Y);
+            player.Velocity = new Vector2(0, 0);
+            player.VelocityGravity = new Vector2(0, 0);
         }
     }
 }
