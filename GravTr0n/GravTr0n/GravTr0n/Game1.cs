@@ -99,7 +99,6 @@ namespace GravTr0n
 
             _keyMenu = new KeyBindingsMenu(_keysBindingArt, _screenWidth, _screenHeight, _gameState, _gameStateCheck);
             _startMenu = new StartMenu(_buttonArt, _screenWidth, _screenHeight, _gameState, _gameStateCheck);   
-
         }
 
         /// <summary>
@@ -176,7 +175,15 @@ namespace GravTr0n
                         _keyMenu.AddDraw(renderer);   
                     }
                 }
-                else if (_gameState == GameState.Quit)
+                else if (gameState == GameState.KeyBindings)
+                {
+                    if (_gameStateCheck == 2)
+                    {
+                        _startMenu.RemoveDraw(renderer);
+                        _keyMenu.AddDraw(renderer);   
+                    }
+                }
+                else if (gameState == GameState.Quit)
                 {
                     this.Exit();
                 }
