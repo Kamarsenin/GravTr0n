@@ -16,6 +16,7 @@ namespace GravTr0n
         private AnimatedDrawable _exit;
         private AnimatedDrawable _pause;
         private AnimatedDrawable _restart;
+        private AnimatedDrawable _back;
         private int dividedPosScreenX = 2;
         private int dividedPosScreenY = 3;
         private int seperateSprites = 47;
@@ -54,6 +55,10 @@ namespace GravTr0n
             _restart.Position = new Vector2(_pause.Position.X, _pause.Position.Y + seperateSprites);
             _restart.StartingOffset = new Point(_restart.StartingOffset.X, _pause.StartingOffset.Y + offSetY);
 
+            _back = new AnimatedDrawable(keyBindingArt, 4, _keysRect, 0.1f);
+            _back.Position = new Vector2(0, 0);
+            _back.StartingOffset = new Point(_restart.StartingOffset.X, _restart.StartingOffset.Y + offSetY);
+
             GameState = gameState;
             GameStateCheck = gameStateCheck;
         }
@@ -67,6 +72,7 @@ namespace GravTr0n
             _exit.Update(gameTime);
             _pause.Update(gameTime);
             _restart.Update(gameTime);
+            _back.Update(gameTime);
 
             if (input.CheckMouseLeft())
                 MouseClicked(input.CheckMousePosition().X, input.CheckMousePosition().Y);
@@ -81,6 +87,7 @@ namespace GravTr0n
             renderer.AddDrawable(_exit);
             renderer.AddDrawable(_pause);
             renderer.AddDrawable(_restart);
+            renderer.AddDrawable(_back);
         }
 
         public void RemoveDraw(IDrawSprites renderer)
@@ -92,6 +99,7 @@ namespace GravTr0n
             renderer.RemoveDrawable(_exit);
             renderer.RemoveDrawable(_pause);
             renderer.RemoveDrawable(_restart);
+            renderer.RemoveDrawable(_back);
         }
 
         private void MouseClicked(int x, int y)
@@ -103,6 +111,7 @@ namespace GravTr0n
             Rectangle exitRect = new Rectangle((int)_exit.Destination.X, (int)_exit.Destination.Y, 128, 46);
             Rectangle pauseRect = new Rectangle((int)_pause.Destination.X, (int)_pause.Destination.Y, 128, 46);
             Rectangle restartRect = new Rectangle((int)_restart.Destination.X, (int)_restart.Destination.Y, 128, 46);
+            Rectangle backRect = new Rectangle((int)_back.Destination.X, (int)_back.Destination.Y, 128, 46);
 
             if (mouseClickRect.Intersects(leftRect))
             {
@@ -115,6 +124,11 @@ namespace GravTr0n
                 //GameState = GameState.Quit;
                 //GameStateCheck = -99;
                 //VERDIER HER PL0x
+            }
+            else if (mouseClickRect.Intersects(backRect))
+            {
+                GameState = GameState.StartMenu;
+                GameStateCheck = 0;
             }
 
         }
