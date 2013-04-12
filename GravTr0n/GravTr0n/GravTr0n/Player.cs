@@ -71,12 +71,14 @@ namespace GravTr0n
         {
             if (input.CheckMoveRight() && Velocity.X < 20)
             {
-                Velocity *= _acceleration;
+                
+                Velocity += new Vector2(4f, 0);
                 Facing = Events.MoveRight;
             }
             else if (input.CheckMoveLeft() && Velocity.X > -20)
             {
-                Velocity *= _acceleration;
+                
+                Velocity += new Vector2(-4f, 0);
                 Facing = Events.MoveLeft;
             }
             else if (Velocity.Equals(Vector2.Zero))
