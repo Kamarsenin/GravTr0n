@@ -12,8 +12,8 @@ namespace GravTr0n
         public Matrix transform;
         private Viewport _view;
         private Vector2 _centre;
-        
 
+        
         public Camera(Viewport view)
         {
             _view = view;

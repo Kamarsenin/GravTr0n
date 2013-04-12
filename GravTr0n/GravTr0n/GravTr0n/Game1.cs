@@ -28,6 +28,7 @@ namespace GravTr0n
 
         private Player _player;
         private Camera _camera;
+        private SoundEffect _backgroundMusic;
 
         private GameState _gameState;
         private int _gameStateCheck;
@@ -94,6 +95,11 @@ namespace GravTr0n
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            _backgroundMusic = Content.Load<SoundEffect>("endless");
+            SoundEffectInstance instance = _backgroundMusic.CreateInstance();
+            instance.IsLooped = true;
+
+            _backgroundMusic.Play();
 
             Texture2D _buttonArt = Content.Load<Texture2D>("meny");
             Texture2D _keysBindingArt = Content.Load<Texture2D>("keysSprite2");
@@ -133,7 +139,6 @@ namespace GravTr0n
                 this.Exit();
 
             CheckPauseKey();
-
             if (!_isPaused)
             {
                 CheckRestartKey();
