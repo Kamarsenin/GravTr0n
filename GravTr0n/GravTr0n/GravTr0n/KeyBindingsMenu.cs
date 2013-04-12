@@ -23,6 +23,11 @@ namespace GravTr0n
         private int seperateSprites = 47;
         private int offSetY = 47;
 
+        private Events _currentKeyBind;
+        private Keys _setKey;
+        private bool _keyNotSet;
+
+
         public GameState GameState { get; set; }
         public int GameStateCheck { get; set; }
 
@@ -139,11 +144,7 @@ namespace GravTr0n
                 GameState = GameState.StartMenu;
                 GameStateCheck = 0;
             }
-            else if (mouseClickRect.Intersects(backRect))
-            {
-                GameState = GameState.StartMenu;
-                GameStateCheck = 0;
-            }
+        }
 
         void SetKeyBind(Events key)
         {
