@@ -98,12 +98,13 @@ namespace GravTr0n
                 else if (Velocity.X < 0)
                     Velocity += _resistance;
             }
-            
-
-
             Position += Velocity;
 
             base.Update(gameTime);
+        }
+        public override String ToString()
+        {
+            return this.Position.ToString();
         }
     }
 }

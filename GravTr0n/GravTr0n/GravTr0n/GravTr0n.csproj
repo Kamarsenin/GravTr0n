@@ -113,7 +113,6 @@
     <Compile Include="AnimatedDrawable.cs" />
     <Compile Include="AnimationController.cs" />
     <Compile Include="Camera.cs" />
-    <Compile Include="Camera2D.cs" />
     <Compile Include="IIsCollidable.cs" />
     <Compile Include="KeyBindingsMenu.cs" />
     <Compile Include="CollisionManager.cs" />
