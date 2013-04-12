@@ -10,6 +10,10 @@ namespace GravTr0n
     public class AnimatedDrawable : DrawData
     {
         private int _currentFrame;
+
+        private float _timer;
+        public float StepTime { get; set; }
+        
         public Point StartingOffset { get; set; }
         public int NumberOfFrames { get; set; }
         public int CurrentFrame
@@ -27,11 +31,22 @@ namespace GravTr0n
             }
         }
 
-        public AnimatedDrawable(Texture2D art, int numberOfFrames, Rectangle source) : base(art, source)
+        public AnimatedDrawable(Texture2D art, int numberOfFrames, Rectangle source, float animationStepTime) : base(art, source)
         {
             StartingOffset = Point.Zero;
             NumberOfFrames = numberOfFrames;
             CurrentFrame = 0;
+            StepTime = animationStepTime;
+        }
+
+        public virtual void Update(GameTime gameTime)
+        {
+            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (_timer >= StepTime)
+            {
+                _timer -= StepTime;
+                CurrentFrame++;
+            }
         }
     }
 }

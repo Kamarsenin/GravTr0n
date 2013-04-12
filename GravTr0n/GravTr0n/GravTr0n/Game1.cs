@@ -15,6 +15,7 @@ namespace GravTr0n
     {
         StartMenu,
         Playing,
+        Quit
     }
     /// <summary>
     /// This is the main type for your game
@@ -26,13 +27,7 @@ namespace GravTr0n
         private Player _player;
         private Camera _camera;
         private float _rotation;
-        private AnimationController _animController;
-        private AnimationController _menuButton1Controller;
-        private AnimationController _menuButton2Controller;
-        private AnimatedDrawable _menuButton1;
-        private AnimatedDrawable _menuButton2;
-        MouseState mouseState;
-        MouseState previousMouseState;
+
         public GameState gameState { get; set; }
         private int _gameStateCheck;
 
@@ -42,6 +37,10 @@ namespace GravTr0n
         private bool _isRestartKeyDown;
         IInputService input;
         IDrawSprites renderer;
+
+        private StartMenu _startMenu;
+        private int _screenWidth;
+        private int _screenHeight;
         
         public Game1()
         {
@@ -70,6 +69,9 @@ namespace GravTr0n
             _gameStateCheck = 0;
             input = (IInputService)Services.GetService(typeof(IInputService));
             renderer = (IDrawSprites)Services.GetService(typeof(IDrawSprites));
+            _screenWidth = GraphicsDevice.Viewport.Width;
+            _screenHeight = GraphicsDevice.Viewport.Height;
+
             base.Initialize();
         }
 
@@ -84,29 +86,13 @@ namespace GravTr0n
             Texture2D _playerArt = Content.Load<Texture2D>("spritesheettest1");
 
             Rectangle playerRect = new Rectangle(0, 0, 100, 117);
-            _player = new Player(_playerArt, 5, playerRect, input);  
+            _player = new Player(_playerArt, 5, playerRect);  
             
-            //renderer.AddDrawable(_player);
-
-            _animController = new AnimationController(_player, 0.3f);
-
             _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
 
             Texture2D _buttonArt = Content.Load<Texture2D>("meny");
 
-            Rectangle menuButton1Rect = new Rectangle(0, 0, 143, 98);
-            _menuButton1 = new AnimatedDrawable(_buttonArt, 5, menuButton1Rect);
-            _menuButton1.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 70, GraphicsDevice.Viewport.Height / 2 - 143);
-            _menuButton1Controller = new AnimationController(_menuButton1, 0.1f);
-
-            Rectangle menuButton2Rect = new Rectangle(0, 0, 143, 98);
-            _menuButton2 = new AnimatedDrawable(_buttonArt, 5, menuButton2Rect);
-            _menuButton2.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 70, (GraphicsDevice.Viewport.Height / 2 - 45));
-            _menuButton2Controller = new AnimationController(_menuButton2, 0.1f);
-            _menuButton2.StartingOffset = new Point(_menuButton2.StartingOffset.X, 98);
-
-                
-            
+            _startMenu = new StartMenu(_buttonArt, _screenWidth, _screenHeight, gameState, _gameStateCheck);   
         }
 
         /// <summary>
@@ -143,41 +129,49 @@ namespace GravTr0n
                 {
                     _restart = false;
                     gameState = GameState.StartMenu;
+                    _startMenu.GameState = gameState;
                     _gameStateCheck = 0;
+                    _startMenu.GameStateCheck = _gameStateCheck;
                 }
-                else if (gameState == GameState.StartMenu && _gameStateCheck == 0)
+                else if (gameState == GameState.StartMenu)
                 {
-                    _gameStateCheck = -1;
-                    renderer.ClearDrawable();
-                    renderer.AddDrawable(_menuButton1);
-                    renderer.AddDrawable(_menuButton2);
+                    if (_gameStateCheck == 0)
+                    {
+                        _gameStateCheck = -1;
+                        renderer.RemoveDrawable(_player);
+                        _startMenu.AddDraw(renderer);
+                    }
+                    else
+                    {
+                        _startMenu.Update(gameTime, input);
 
+                        if (!gameState.Equals(_startMenu.GameState))
+                        {
+                            gameState = _startMenu.GameState;
+                            _gameStateCheck = _startMenu.GameStateCheck;                           
+                        }
+                    }
                 }
-                else if (gameState == GameState.Playing && _gameStateCheck == 1)
+                else if (gameState == GameState.Playing)
                 {
-                    _gameStateCheck = -1;
-                    renderer.ClearDrawable();
-                    renderer.AddDrawable(_player);
+                    if (_gameStateCheck == 1)
+                    {
+                        _gameStateCheck = -1;
+                        _startMenu.RemoveDraw(renderer);
+                        renderer.AddDrawable(_player);
+                    }
+                    else
+                    {
+                        _player.Update(gameTime, input);
+                    }
+                }
+                else if (gameState == GameState.Quit)
+                {
+                    this.Exit();
                 }
 
                 _camera.Update(gameTime, -_rotation, _player.Position, 0.7f);
-                _animController.Update(gameTime);
-
-                _menuButton1Controller.Update(gameTime);
-                _menuButton2Controller.Update(gameTime);
-
-                _player.Update();
-                mouseState = Mouse.GetState();
-                if (previousMouseState.LeftButton == ButtonState.Pressed &&
-                    mouseState.LeftButton == ButtonState.Released)
-                {
-                    MouseClicked(mouseState.X, mouseState.Y);
-                }
-                previousMouseState = mouseState;
-                if (gameState == GameState.Playing)
-                {
-
-                }
+                
                 base.Update(gameTime);
             }
         }
@@ -194,26 +188,7 @@ namespace GravTr0n
 
             base.Draw(gameTime);
         }
-        void MouseClicked(int x, int y)
-        {
-            Rectangle mouseClickRect = new Rectangle(x, y, 10, 10);
-            if (gameState == GameState.StartMenu)
-            {
-                Rectangle menuButton1Rect = new Rectangle((int)_menuButton1.Destination.X, (int)_menuButton1.Destination.Y,
-                                                                143, 98);
-                Rectangle menuButton2Rect = new Rectangle((int)_menuButton2.Destination.X, (int)_menuButton2.Destination.Y,
-                                                                143, 98);
-                if (mouseClickRect.Intersects(menuButton1Rect))
-                {
-                    gameState = GameState.Playing;
-                    _gameStateCheck = 1;
-                }
-                else if (mouseClickRect.Intersects(menuButton2Rect))
-                {
-                    this.Exit();
-                }
-            }
-        }
+        
 
         void CheckPauseKey()
         {

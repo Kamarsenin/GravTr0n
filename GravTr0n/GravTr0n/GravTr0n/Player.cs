@@ -13,8 +13,10 @@ namespace GravTr0n
         // MORTEN SITT
         public Vector2 Velocity { get; set; }
         private Vector2 _resistance;
+        private Vector2 _gravityDown;
+        private Vector2 _gravityDirection;
         private float _acceleration;
-        private IInputService _input;
+        //private IInputService _input;
         // MORTEN SITT SLUTT
 
         // Which way am I facing?
@@ -56,23 +58,23 @@ namespace GravTr0n
             }
         }
         
-        public Player(Texture2D art, int numberOfFrames, Rectangle source, IInputService input) 
-            : base(art, numberOfFrames, source)
+        public Player(Texture2D art, int numberOfFrames, Rectangle source) 
+            : base(art, numberOfFrames, source, 0.1f)
         {
             Facing = Events.Idle;
             _resistance = new Vector2(1, 0);
             _acceleration = 0.2f;
-            _input = input;
+            //_input = input;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime, IInputService input)
         {
-            if (_input.CheckMoveRight() && Velocity.X < 20)
+            if (input.CheckMoveRight() && Velocity.X < 20)
             {
                 Velocity *= _acceleration;
                 Facing = Events.MoveRight;
             }
-            else if (_input.CheckMoveLeft() && Velocity.X > -20)
+            else if (input.CheckMoveLeft() && Velocity.X > -20)
             {
                 Velocity *= _acceleration;
                 Facing = Events.MoveLeft;
@@ -91,6 +93,8 @@ namespace GravTr0n
             }
 
             Position += Velocity;
+
+            base.Update(gameTime);
         }
     }
 }

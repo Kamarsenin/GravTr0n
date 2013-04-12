@@ -13,10 +13,10 @@ namespace GravTr0n
         public float StepTime { get; set; }
         private float _timer;
 
-        public AnimationController(AnimatedDrawable Player,
+        public AnimationController(AnimatedDrawable player,
             float animationStepTime)
         {
-            _player = Player;
+            _player = player;
             StepTime = animationStepTime;
         }
 

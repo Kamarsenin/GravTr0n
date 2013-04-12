@@ -17,6 +17,9 @@ namespace GravTr0n
     /// </summary>
     public class InputManager : GameComponent, IInputService
     {
+        private MouseState _mouseStateCurrent;
+        private MouseState _mouseStatePrevious;
+        private Point _mousePosition;
 
         public InputManager(Game game)
             : base(game)
@@ -32,7 +35,7 @@ namespace GravTr0n
         {
             // TODO: Add your initialization code here
             KeyBindings.GenerateKeyBindingsFromXmlFile("Content/keybindings.xml");
-
+            
             base.Initialize();
         }
 
@@ -44,6 +47,9 @@ namespace GravTr0n
         {
             // TODO: Add your update code here
             KeyBindings.GetActivatedEvents();
+            _mouseStatePrevious = _mouseStateCurrent;
+            _mouseStateCurrent = Mouse.GetState();
+            _mousePosition = new Point(_mouseStateCurrent.X, _mouseStateCurrent.Y);
             
         }
 
@@ -93,6 +99,24 @@ namespace GravTr0n
                 return true;
             else
                 return false;
+        }
+
+        public bool CheckMouseLeft()
+        {
+            if (_mouseStateCurrent.LeftButton == ButtonState.Pressed &&
+                _mouseStatePrevious.LeftButton == ButtonState.Released)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public Point CheckMousePosition()
+        {
+            return _mousePosition;
         }
     }
 }

@@ -114,8 +114,11 @@
     <Compile Include="AnimationController.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Camera2D.cs" />
+    <Compile Include="CollisionManager.cs" />
     <Compile Include="DrawData.cs" />
     <Compile Include="Events.cs" />
+    <Compile Include="ICharacter.cs" />
+    <Compile Include="ICollisionService.cs" />
     <Compile Include="IInputService.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="KeyBindings.cs" />
@@ -126,6 +129,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="SpriteComponent.cs" />
+    <Compile Include="StartMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -133,11 +137,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GravTr0nContent\GravTr0nContent.contentproj">
-	  <Name>GravTr0nContent</Name>
-	  <XnaReferenceType>Content</XnaReferenceType>
-	</ProjectReference>
-	</ItemGroup>
-	<ItemGroup>
+      <Name>GravTr0nContent</Name>
+      <XnaReferenceType>Content</XnaReferenceType>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
