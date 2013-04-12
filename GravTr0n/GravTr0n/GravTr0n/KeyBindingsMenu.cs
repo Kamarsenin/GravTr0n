@@ -24,31 +24,31 @@ namespace GravTr0n
         {
             Rectangle _keysRect = new Rectangle(0, 0, 128, 94);
             _keys = new AnimatedDrawable(keyBindingArt, 5, _keysRect, 0.2f);
-            _keys.Position = new Vector2(screenWidth / 2 - 70, screenHeight / 2 - 143);
+            _keys.Position = new Vector2(screenWidth / 2 - 94, screenHeight / 2 - 128);
 
             _left = new AnimatedDrawable(keyBindingArt, 5, _keysRect, 0.2f);
-            _left.Position = new Vector2(screenWidth / 2 - 70, screenHeight / 2 - 143);
-            _left.StartingOffset = new Point(_left.StartingOffset.X, 98);
+            _left.Position = new Vector2(screenWidth / 2 - 94, screenHeight / 2 - 128);
+            _left.StartingOffset = new Point(_left.StartingOffset.X, 94);
 
             _right = new AnimatedDrawable(keyBindingArt, 5, _keysRect, 0.2f);
-            _right.Position = new Vector2(screenWidth / 2 - 70, screenHeight / 2 - 143);
-            _right.StartingOffset = new Point(_right.StartingOffset.X, 98);
+            _right.Position = new Vector2(screenWidth / 2 - 94, screenHeight / 2 - 128);
+            _right.StartingOffset = new Point(_right.StartingOffset.X, 188);
 
             _jump = new AnimatedDrawable(keyBindingArt, 5, _keysRect, 0.2f);
-            _jump.Position = new Vector2(screenWidth / 2 - 70, screenHeight / 2 - 143);
-            _jump.StartingOffset = new Point(_jump.StartingOffset.X, 98);
+            _jump.Position = new Vector2(screenWidth / 2 - 94, screenHeight / 2 - 128);
+            _jump.StartingOffset = new Point(_jump.StartingOffset.X, 282);
 
             _exit = new AnimatedDrawable(keyBindingArt, 5, _keysRect, 0.2f);
-            _exit.Position = new Vector2(screenWidth / 2 - 70, screenHeight / 2 - 143);
-            _exit.StartingOffset = new Point(_exit.StartingOffset.X, 98);
+            _exit.Position = new Vector2(screenWidth / 2 - 94, screenHeight / 2 - 128);
+            _exit.StartingOffset = new Point(_exit.StartingOffset.X, 376);
 
             _pause = new AnimatedDrawable(keyBindingArt, 5, _keysRect, 0.2f);
-            _pause.Position = new Vector2(screenWidth / 2 - 70, screenHeight / 2 - 143);
-            _pause.StartingOffset = new Point(_pause.StartingOffset.X, 98);
+            _pause.Position = new Vector2(screenWidth / 2 - 94, screenHeight / 2 - 128);
+            _pause.StartingOffset = new Point(_pause.StartingOffset.X, 470);
 
             _restart = new AnimatedDrawable(keyBindingArt, 5, _keysRect, 0.2f);
-            _restart.Position = new Vector2(screenWidth / 2 - 70, screenHeight / 2 - 143);
-            _restart.StartingOffset = new Point(_restart.StartingOffset.X, 98);
+            _restart.Position = new Vector2(screenWidth / 2 - 94, screenHeight / 2 - 128);
+            _restart.StartingOffset = new Point(_restart.StartingOffset.X, 470);
 
             GameState = gameState;
             GameStateCheck = gameStateCheck;
