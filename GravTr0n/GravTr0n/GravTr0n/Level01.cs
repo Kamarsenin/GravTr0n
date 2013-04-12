@@ -50,7 +50,7 @@ namespace GravTr0n
 
         }
 
-        public void Update(ICollisionService collisionManager, Vector2 offset)
+        public void Update(ICollisionService collisionManager)
         {
             for (int i = 1; i < _levelObjects.Count; i++)
             {
