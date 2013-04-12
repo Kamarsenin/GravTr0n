@@ -182,7 +182,6 @@ namespace GravTr0n
                         _level01.AddDraw(renderer);
                     }
                     _camera.Update(gameTime, _player);
-                    Window.Title = _camera.ToString() + " " + _player.ToString();
 
                     _level01.Update(collisionManager);
                     _player.Update(gameTime, input);

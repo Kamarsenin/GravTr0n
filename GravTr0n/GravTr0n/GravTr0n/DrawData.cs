@@ -11,6 +11,7 @@ namespace GravTr0n
     {
         private Rectangle _destination;
         private Vector2 _position;
+        public Vector2 PrevPosition { get; set; }
 
         public Texture2D Art { get; set; }
         public Rectangle Source { get; set; }
@@ -24,6 +25,7 @@ namespace GravTr0n
             get { return _position; }
             set
             {
+                PrevPosition = _position;
                 _position = value;
                 _destination.X = (int)_position.X;
                 _destination.Y = (int)_position.Y;
@@ -46,6 +48,7 @@ namespace GravTr0n
             Source = source;
             Destination = Source;
             BlendColor = Color.White;
+            PrevPosition = Vector2.Zero;
         }
     }
 }

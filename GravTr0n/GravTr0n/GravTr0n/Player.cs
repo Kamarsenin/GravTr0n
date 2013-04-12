@@ -39,6 +39,7 @@ namespace GravTr0n
                     if (_facing == Events.Idle)
                     {
                         temp = 2;
+                        Velocity = Vector2.Zero;
                     }
                     else if (_facing == Events.MoveRight)
                     {
