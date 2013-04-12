@@ -139,6 +139,11 @@ namespace GravTr0n
                 GameState = GameState.StartMenu;
                 GameStateCheck = 0;
             }
+            else if (mouseClickRect.Intersects(backRect))
+            {
+                GameState = GameState.StartMenu;
+                GameStateCheck = 0;
+            }
 
         void SetKeyBind(Events key)
         {
