@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace GravTr0n
 {
@@ -19,6 +20,9 @@ namespace GravTr0n
         private int dividedPosScreenX = 2;
         private int dividedPosScreenY = 3;
 
+        private Events _currentKeyBind;
+        private Keys _setKey;
+        private bool _keyNotSet;
 
         public GameState GameState { get; set; }
         public int GameStateCheck { get; set; }
@@ -69,6 +73,18 @@ namespace GravTr0n
 
             if (input.CheckMouseLeft())
                 MouseClicked(input.CheckMousePosition().X, input.CheckMousePosition().Y);
+
+
+            if (_keyNotSet)
+            {
+                Keys[] _clickedKeys = Keyboard.GetState().GetPressedKeys();
+                if (_clickedKeys.Length > 0)
+                {
+                    KeyBindings.AddKeyBinding(_currentKeyBind.ToString(), _clickedKeys[0].ToString());
+                    Console.WriteLine(_currentKeyBind.ToString() + " set to " + _clickedKeys[0].ToString());
+                    _keyNotSet = false;
+                }
+            }
         }
 
         public void AddDraw(IDrawSprites renderer)
@@ -105,17 +121,19 @@ namespace GravTr0n
 
             if (mouseClickRect.Intersects(leftRect))
             {
-                //GameState = GameState.Playing;
-                //GameStateCheck = 1;
-                //SETT INN VERDIER HER
+                SetKeyBind(Events.MoveLeft);
             }
             else if (mouseClickRect.Intersects(rightRect))
             {
-                //GameState = GameState.Quit;
-                //GameStateCheck = -99;
-                //VERDIER HER PL0x
+                SetKeyBind(Events.MoveRight);
             }
 
+        }
+
+        void SetKeyBind(Events key)
+        {
+            _currentKeyBind = key;
+            _keyNotSet = true;
         }
     }
 }

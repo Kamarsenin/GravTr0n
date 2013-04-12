@@ -42,7 +42,7 @@ namespace GravTr0n
         /// </summary>
         /// <param name="eventName">A string with the name of the event</param>
         /// <param name="keyName">A string with the name of the key</param>
-        private static void AddKeyBinding(string eventName, string keyName)
+        public static void AddKeyBinding(string eventName, string keyName)
         {
             KeyEventBinding newKeyBinding;
 
