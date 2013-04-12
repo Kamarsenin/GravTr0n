@@ -51,6 +51,11 @@ namespace GravTr0n
                 Keys key = (Keys)Enum.Parse(typeof(Keys), keyName, true);
                 Events keyEvent = (Events)Enum.Parse(typeof(Events), eventName, true);
                 newKeyBinding = new KeyEventBinding(key, keyEvent);
+                for (int i = 0; i < keybindings.Count; i++)
+                {
+                    if (keybindings[i].eventName.ToString() == eventName)
+                        keybindings.RemoveAt(i);
+                }
                 keybindings.Add(newKeyBinding);
             }
             catch (InvalidCastException e)
