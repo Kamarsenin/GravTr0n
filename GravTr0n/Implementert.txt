@@ -30,8 +30,12 @@ KVA HAR ME IMPLEMENTERT?
 2 PTS - Systemet har støtte for bevegelser i desimalform (Vector2).
 2 PTS - Spiller har forskjellig bevegelseshastighet, og akselerasjonsmengde
 		benyttes for å bytte mellom disse (Vector2 acceleration).
-5 PTS - Spillet kan spille av lyder med SoundEffect		
-
+		**** MERK! ***
+		Eg er ikkje sikker på kva som meines her: Om det meines at speler har bevegelsesmengde,
+		eller om speler har ein bevegelsesvektor (velocity) og ein akselerasjon som endrer
+		bevegelsesvektoren. Om det er sistnevnte, så skal det vere implementert. 
+		
 15 PTS - Spillet kan startes på nytt, avsluttes, bli pauset, tapt og vunnet.
+5 PTS - Spillet kan spille av lyder med SoundEffect		
 
 91 PTS TOTAL

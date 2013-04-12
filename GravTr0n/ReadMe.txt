@@ -17,20 +17,3 @@ Jump == Space
 Pause == P
 Restart == R
 
-HOW-TO:
-Skifte keybindings.
-	Steg 1:
-		Start spillet
-	Steg 2:
-		Trykk på Keys
-	Steg 3:
-		Idèmyldre med deg selv eller med en venn, om hvilken tast som skal rebindes
-	Steg 4:
-		Klikk på det du vil forandre, som du fant ut av i steg 3
-	Steg 5:
-		Husket du å tenke på en ny tast å rebinde med!? 
-		Trykk på den tasten du vil rebinde til
-	Steg 6: ?????????
-	Steg 7: Profit!
-
-P.S: Det kan leses i Console vinduet hvilken knapp du valgte å rebinde til.
