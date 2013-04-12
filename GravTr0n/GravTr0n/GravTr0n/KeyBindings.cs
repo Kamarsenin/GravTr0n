@@ -42,7 +42,7 @@ namespace GravTr0n
         /// </summary>
         /// <param name="eventName">A string with the name of the event</param>
         /// <param name="keyName">A string with the name of the key</param>
-        private static void AddKeyBinding(string eventName, string keyName)
+        public static void AddKeyBinding(string eventName, string keyName)
         {
             KeyEventBinding newKeyBinding;
 
@@ -51,6 +51,11 @@ namespace GravTr0n
                 Keys key = (Keys)Enum.Parse(typeof(Keys), keyName, true);
                 Events keyEvent = (Events)Enum.Parse(typeof(Events), eventName, true);
                 newKeyBinding = new KeyEventBinding(key, keyEvent);
+                for (int i = 0; i < keybindings.Count; i++)
+                {
+                    if (keybindings[i].eventName.ToString() == eventName)
+                        keybindings.RemoveAt(i);
+                }
                 keybindings.Add(newKeyBinding);
             }
             catch (InvalidCastException e)
