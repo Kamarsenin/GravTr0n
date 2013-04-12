@@ -24,11 +24,12 @@ namespace GravTr0n
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         private Player _player;
         private Camera _camera;
         private float _rotation;
 
-        public GameState gameState { get; set; }
+        private GameState _gameState;
         private int _gameStateCheck;
 
         private bool _isPaused;
@@ -65,7 +66,7 @@ namespace GravTr0n
         {
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
-            gameState = GameState.StartMenu;
+            _gameState = GameState.StartMenu;
             _gameStateCheck = 0;
             input = (IInputService)Services.GetService(typeof(IInputService));
             renderer = (IDrawSprites)Services.GetService(typeof(IDrawSprites));
@@ -92,7 +93,7 @@ namespace GravTr0n
 
             Texture2D _buttonArt = Content.Load<Texture2D>("meny");
 
-            _startMenu = new StartMenu(_buttonArt, _screenWidth, _screenHeight, gameState, _gameStateCheck);   
+            _startMenu = new StartMenu(_buttonArt, _screenWidth, _screenHeight, _gameState, _gameStateCheck);   
         }
 
         /// <summary>
@@ -122,18 +123,17 @@ namespace GravTr0n
 
             if (!_isPaused)
             {
-
                 CheckRestartKey();
 
                 if (_restart)
                 {
                     _restart = false;
-                    gameState = GameState.StartMenu;
-                    _startMenu.GameState = gameState;
+                    _gameState = GameState.StartMenu;
+                    _startMenu.GameState = _gameState;
                     _gameStateCheck = 0;
                     _startMenu.GameStateCheck = _gameStateCheck;
                 }
-                else if (gameState == GameState.StartMenu)
+                else if (_gameState == GameState.StartMenu)
                 {
                     if (_gameStateCheck == 0)
                     {
@@ -141,18 +141,16 @@ namespace GravTr0n
                         renderer.RemoveDrawable(_player);
                         _startMenu.AddDraw(renderer);
                     }
-                    else
-                    {
-                        _startMenu.Update(gameTime, input);
+                    
+                    _startMenu.Update(gameTime, input);
 
-                        if (!gameState.Equals(_startMenu.GameState))
-                        {
-                            gameState = _startMenu.GameState;
-                            _gameStateCheck = _startMenu.GameStateCheck;                           
-                        }
+                    if (!_gameState.Equals(_startMenu.GameState))
+                    {
+                        _gameState = _startMenu.GameState;
+                        _gameStateCheck = _startMenu.GameStateCheck;                           
                     }
                 }
-                else if (gameState == GameState.Playing)
+                else if (_gameState == GameState.Playing)
                 {
                     if (_gameStateCheck == 1)
                     {
@@ -160,12 +158,11 @@ namespace GravTr0n
                         _startMenu.RemoveDraw(renderer);
                         renderer.AddDrawable(_player);
                     }
-                    else
-                    {
-                        _player.Update(gameTime, input);
-                    }
+                    
+                    _player.Update(gameTime, input);
+                    
                 }
-                else if (gameState == GameState.Quit)
+                else if (_gameState == GameState.Quit)
                 {
                     this.Exit();
                 }
@@ -189,7 +186,6 @@ namespace GravTr0n
             base.Draw(gameTime);
         }
         
-
         void CheckPauseKey()
         {
             if (input.CheckPause())
