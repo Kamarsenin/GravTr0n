@@ -39,6 +39,7 @@ namespace GravTr0n
         private bool _isRestartKeyDown;
         IInputService input;
         IDrawSprites renderer;
+        ICollisionService collisionManager;
 
         private StartMenu _startMenu;
         private int _screenWidth;
@@ -52,10 +53,13 @@ namespace GravTr0n
             Content.RootDirectory = "Content";
             SpriteComponent renderer = new SpriteComponent(this);
             InputManager input = new InputManager(this);
+            CollisionManager collisionManager = new CollisionManager(this);
             Components.Add(renderer);
             Components.Add(input);
+            Components.Add(collisionManager);
             Services.AddService(typeof(IDrawSprites), renderer);
             Services.AddService(typeof(IInputService), input);
+            Services.AddService(typeof(ICollisionService), collisionManager);
             _rotation = 0.4f;
         }
 
@@ -73,6 +77,7 @@ namespace GravTr0n
             _gameStateCheck = 0;
             input = (IInputService)Services.GetService(typeof(IInputService));
             renderer = (IDrawSprites)Services.GetService(typeof(IDrawSprites));
+            collisionManager = (ICollisionService)Services.GetService(typeof(ICollisionService));
             _screenWidth = GraphicsDevice.Viewport.Width;
             _screenHeight = GraphicsDevice.Viewport.Height;
 
@@ -145,6 +150,7 @@ namespace GravTr0n
                     {
                         _gameStateCheck = -1;
                         renderer.RemoveDrawable(_player);
+                        _keyMenu.RemoveDraw(renderer);
                         _startMenu.AddDraw(renderer);
                     }
                     

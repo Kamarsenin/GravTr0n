@@ -8,14 +8,16 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GravTr0n
 {
     
-    public class Player : AnimatedDrawable
+    public class Player : AnimatedDrawable, ICharacter
     {   
         // MORTEN SITT
         public Vector2 Velocity { get; set; }
         private Vector2 _resistance;
         private Vector2 _gravityDown;
+        private Vector2 _gravityDownVelocity;
         private Vector2 _gravityDirection;
         private float _acceleration;
+        private float _accelerationGravityDown;
         //private IInputService _input;
         // MORTEN SITT SLUTT
 
@@ -64,6 +66,9 @@ namespace GravTr0n
             Facing = Events.Idle;
             _resistance = new Vector2(1, 0);
             _acceleration = 0.2f;
+            _gravityDown = new Vector2(0, 1);
+            _gravityDirection = _gravityDown;
+            _accelerationGravityDown = 0.5f;
             //_input = input;
         }
 
@@ -93,6 +98,8 @@ namespace GravTr0n
                 else if (Velocity.X < 0)
                     Velocity += _resistance;
             }
+            
+
 
             Position += Velocity;
 

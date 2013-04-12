@@ -5,9 +5,8 @@ using System.Text;
 
 namespace GravTr0n
 {
-    interface ICollisionService
+    interface IIsCollidable
     {
-        bool IsCollision();
-        void ResolveCollision();
+        bool IsCollidable();
     }
 }
