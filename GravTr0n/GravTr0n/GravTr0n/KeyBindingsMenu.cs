@@ -20,11 +20,6 @@ namespace GravTr0n
         private AnimatedDrawable _back;
         private int dividedPosScreenX = 2;
         private int dividedPosScreenY = 3;
-
-        private Events _currentKeyBind;
-        private Keys _setKey;
-        private bool _keyNotSet;
-
         private int seperateSprites = 47;
         private int offSetY = 47;
 
@@ -138,6 +133,16 @@ namespace GravTr0n
             else if (mouseClickRect.Intersects(rightRect))
             {
                 SetKeyBind(Events.MoveRight);
+            }
+            else if (mouseClickRect.Intersects(backRect))
+            {
+                GameState = GameState.StartMenu;
+                GameStateCheck = 0;
+            }
+            else if (mouseClickRect.Intersects(backRect))
+            {
+                GameState = GameState.StartMenu;
+                GameStateCheck = 0;
             }
             else if (mouseClickRect.Intersects(backRect))
             {
