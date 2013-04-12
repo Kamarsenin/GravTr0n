@@ -62,15 +62,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="keysSprite2.png">
-      <Name>keysSprite2</Name>
+    <Compile Include="meny.PNG">
+      <Name>meny</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="meny.PNG">
-      <Name>meny</Name>
+    <Compile Include="keysSprite2.png">
+      <Name>keysSprite2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
