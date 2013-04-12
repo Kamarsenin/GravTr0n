@@ -118,7 +118,6 @@
     <Compile Include="CollisionManager.cs" />
     <Compile Include="DrawData.cs" />
     <Compile Include="Events.cs" />
-    <Compile Include="ICharacter.cs" />
     <Compile Include="ICollisionService.cs" />
     <Compile Include="IInputService.cs" />
     <Compile Include="InputManager.cs" />
