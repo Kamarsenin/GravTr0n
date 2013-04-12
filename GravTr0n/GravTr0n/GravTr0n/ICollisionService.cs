@@ -7,7 +7,7 @@ namespace GravTr0n
 {
     interface ICollisionService
     {
-        bool IsCollision();
-        void ResolveCollision();
+        bool IsCollision(Player player, DrawData item);
+        void ResolveCollision(Player player, DrawData item);
     }
 }

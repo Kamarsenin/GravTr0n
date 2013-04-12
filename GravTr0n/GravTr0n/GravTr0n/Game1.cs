@@ -46,6 +46,7 @@ namespace GravTr0n
         private int _screenHeight;
 
         private KeyBindingsMenu _keyMenu;
+        private Level01 _level01;
 
         public Game1()
         {
@@ -92,18 +93,22 @@ namespace GravTr0n
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Texture2D _playerArt = Content.Load<Texture2D>("spritesheettest1");
-
-            Rectangle playerRect = new Rectangle(0, 0, 100, 117);
-            _player = new Player(_playerArt, 5, playerRect);  
-            
-            _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
 
             Texture2D _buttonArt = Content.Load<Texture2D>("meny");
             Texture2D _keysBindingArt = Content.Load<Texture2D>("keysSprite2");
-
             _keyMenu = new KeyBindingsMenu(_keysBindingArt, _screenWidth, _screenHeight, _gameState, _gameStateCheck);
-            _startMenu = new StartMenu(_buttonArt, _screenWidth, _screenHeight, _gameState, _gameStateCheck);   
+            _startMenu = new StartMenu(_buttonArt, _screenWidth, _screenHeight, _gameState, _gameStateCheck);  
+
+            Texture2D _playerArt = Content.Load<Texture2D>("spritesheettest1");
+            Rectangle playerRect = new Rectangle(0, 0, 100, 117);
+            _player = new Player(_playerArt, 5, playerRect);
+
+            Texture2D terrainArt = Content.Load<Texture2D>("spriteTerrain");
+            _level01 = new Level01(terrainArt, _playerArt, _gameState, _gameStateCheck, _player);
+            
+            _camera = new Camera(new Viewport((int)_player.Position.X, (int)_player.Position.Y, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
+
+             
 
         }
 
@@ -149,8 +154,7 @@ namespace GravTr0n
                     if (_gameStateCheck == 0)
                     {
                         _gameStateCheck = -1;
-                        renderer.RemoveDrawable(_player);
-                        _keyMenu.RemoveDraw(renderer);
+                        renderer.ClearDrawable();
                         _startMenu.AddDraw(renderer);
                     }
                     
@@ -170,9 +174,10 @@ namespace GravTr0n
                     {
                         _gameStateCheck = -1;
                         _startMenu.RemoveDraw(renderer);
-                        renderer.AddDrawable(_player);
+                        _level01.AddDraw(renderer);
                     }
-                    
+
+                    _level01.Update(collisionManager);
                     _player.Update(gameTime, input);
                     
                 }
