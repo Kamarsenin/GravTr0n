@@ -159,12 +159,14 @@ namespace GravTr0n
                     if (!_gameState.Equals(_startMenu.GameState))
                     {
                         _gameState = _startMenu.GameState;
-                        _gameStateCheck = _startMenu.GameStateCheck;                           
+                        _keyMenu.GameState = _gameState;
+                        _gameStateCheck = _startMenu.GameStateCheck;
+                        _keyMenu.GameStateCheck = _gameStateCheck; 
                     }
                 }
                 else if (_gameState == GameState.Playing)
                 {
-                    if (_gameStateCheck == 1)
+                    if (_gameStateCheck == 2)
                     {
                         _gameStateCheck = -1;
                         _startMenu.RemoveDraw(renderer);
@@ -176,13 +178,21 @@ namespace GravTr0n
                 }
                 else if (_gameState == GameState.KeyBindings)
                 {
-                    if (_gameStateCheck == 2)
+                    if (_gameStateCheck == 1)
                     {
                         _gameStateCheck = -1;
                         _startMenu.RemoveDraw(renderer);
                         _keyMenu.AddDraw(renderer);
                     }
                     _keyMenu.Update(gameTime, input);
+
+                    if (!_gameState.Equals(_keyMenu.GameState))
+                    {
+                        _gameState = _keyMenu.GameState;
+                        _startMenu.GameState = _gameState;
+                        _gameStateCheck = _keyMenu.GameStateCheck;
+                        _startMenu.GameStateCheck = _gameStateCheck;
+                    }
                 }
                 else if (_gameState == GameState.Quit)
                 {
