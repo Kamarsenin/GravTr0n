@@ -79,13 +79,13 @@ namespace GravTr0n
             if (input.CheckMoveRight() && Velocity.X < 20)
             {
                 
-                Velocity += new Vector2(4f, 0);
+                Velocity += new Vector2(1, 0) * (_acceleration * _deltaTime) ;
                 Facing = Events.MoveRight;
             }
             else if (input.CheckMoveLeft() && Velocity.X > -20)
             {
-                
-                Velocity += new Vector2(-4f, 0);
+
+                Velocity -= new Vector2(1, 0) * (_acceleration * _deltaTime);
                 Facing = Events.MoveLeft;
             }
             else if (Velocity.Equals(Vector2.Zero))
@@ -101,8 +101,10 @@ namespace GravTr0n
                     Velocity += _resistance;
             }
 
+            // Maks grense for gravitasjonshastighet
             if (VelocityGravity.Y < 10)
             {
+
                 VelocityGravity += _gravityDirection * _acceleration * _deltaTime;
                 Velocity += VelocityGravity;
             }
