@@ -6,6 +6,10 @@ GravTr0n is GOTY! - Some famous game journalist
 I wish my dog could play this, too bad he is a dog - Random guy on the street
 I sold my house, my car and my wife to support these guys, they are doing an awesome job with GravTr0n - Rich Banker
 
+Informasjon om spillet:
+Spillet vi har designet og produsert fra grunn bakke er et spill for alle, det er ikke mulig å tape, og alle vinner når
+man spiller dette spillet. 
+
 Historie:
 Du er en strekmann, som prøver å rømme fra tegneren og ut av notisblokken. 
 Her må du unngå ulike objekter og komme deg til mål!
@@ -34,3 +38,4 @@ Restart == R
 -	Steg 7: Profit!
 -
 -P.S: Det kan leses i Console vinduet hvilken knapp du valgte å rebinde til.
+
